@@ -161,7 +161,6 @@
   <script src="{{asset('assets/js/scripts.js')}}"></script>
   <script src="{{asset('assets/bundles/summernote/summernote-bs4.min.js')}}"></script>
   <script src="{{asset('js/angular.min.js')}}"></script>
-  <script src="{{asset('js/automate.js')}}"></script>
   <script src="{{asset('js/purchases.js')}}"></script>
   <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js')}}"></script>
   <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>

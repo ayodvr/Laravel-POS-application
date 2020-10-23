@@ -1,7 +1,7 @@
 @extends('layouts.purchase')
 @section('content')
      
-<div class="main-content" ng-app ='tutapos'>
+<div class="main-content" ng-app ='tutpos'>
 	<section class="section">
 	  <div class="section-header">
 		<h1>Add Purchase</h1>
@@ -12,7 +12,7 @@
 		</div>
 	  </div>
 	  <div class="section-body">
-		<div class="row" ng-controller="SearchProductCtrl">
+		<div class="row" ng-controller="SearchPurchaseCtrl">
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="card">
 					<div class="card-body">
