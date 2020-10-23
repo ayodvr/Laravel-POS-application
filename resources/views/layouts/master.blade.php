@@ -11,18 +11,21 @@
   <link rel="stylesheet" href="{{asset('assets/css/app.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/pretty-checkbox/pretty-checkbox.min.css')}}">
   <link rel="stylesheet" href="{{ asset('css/iziToast.css') }}">
-  <link rel="stylesheet" href="{{asset('assets/bundles/fullcalendar/fullcalendar.min.css')}}">
   <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')}}"></script>
   <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')}}"></script>
    <link rel="stylesheet" href="{{asset('assets/bundles/datatables/datatables.min.css')}}">
    <link rel="stylesheet" href="{{asset('assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/bundles/summernote/summernote-bs4.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/components.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/bootstrap-social/bootstrap-social.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/flag-icon-css/css/flag-icon.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/jqvmap/dist/jqvmap.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/weather-icon/css/weather-icons.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/bundles/select2/dist/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/bundles/jquery-selectric/selectric.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/weather-icon/css/weather-icons-wind.min.css')}}">
+  {{-- <link href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css')}}" rel="stylesheet" /> --}}
   <link rel='shortcut icon' type='image/x-icon' href='{{asset('assets/img/favicon.ico')}}' />
 </head>
 
@@ -31,10 +34,9 @@
                     @yield('content')
                     @include('includes.footer')
 
-
      <div id="registerModal" class="modal fade">
                       <div class="modal-dialog" role="document">
-                          <div class="modal-content" style="background-color:#060d13">
+                          <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
@@ -142,34 +144,35 @@
 <script src="{{asset('assets/js/app.min.js')}}"></script>
   <script src="{{asset('assets/bundles/datatables/datatables.min.js')}}"></script>
   <script src="{{asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
-  <script src="{{asset('assets/bundles/datatables/export-tables/dataTables.buttons.min.js')}}"></script>
-  <script src="{{asset('assets/bundles/datatables/export-tables/buttons.flash.min.js')}}"></script>
-  <script src="{{asset('assets/bundles/datatables/export-tables/jszip.min.js')}}"></script>
-  <script src="{{asset('assets/bundles/datatables/export-tables/pdfmake.min.js')}}"></script>
-  <script src="{{asset('assets/bundles/datatables/export-tables/vfs_fonts.js')}}"></script>
-  <script src="{{asset('assets/bundles/datatables/export-tables/buttons.print.min.js')}}"></script>
   <script src="{{asset('assets/js/page/datatables.js')}}"></script>
   <script src="{{asset('assets/bundles/echart/echarts.js')}}"></script>
   <script src="{{ asset('js/iziToast.js') }}"></script>
   @include('vendor.lara-izitoast.toast')
   <script src="{{asset('assets/bundles/chartjs/chart.min.js')}}"></script>
+  <script src="{{('assets/js/page/portfolio.js')}}"></script>
+  {{-- <script>
+    $('.select2').select2();
+</script> --}}
+<script src="{{asset('assets/bundles/select2/dist/js/select2.full.min.js')}}"></script>
+<script src="{{asset('assets/bundles/jquery-selectric/jquery.selectric.min.js')}}"></script>
   <script src="{{asset('assets/bundles/apexcharts/apexcharts.min.js')}}"></script>
-  <script src="{{asset('assets/bundles/fullcalendar/fullcalendar.min.js')}}"></script>
-  <script src="{{asset('assets/js/page/calendar.js')}}"></script>
+  <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js')}}"></script>
   <script src="{{asset('assets/js/page/index.js')}}"></script>
   <script src="{{asset('assets/js/scripts.js')}}"></script>
+  <script src="{{asset('assets/bundles/summernote/summernote-bs4.min.js')}}"></script>
+  <script src="{{asset('js/angular.min.js')}}"></script>
+  <script src="{{asset('js/automate.js')}}"></script>
   <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js')}}"></script>
   <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
   @include('sweetalert::alert')
   <script>
-          // Modal for trashing users
+          // Form method for delete/trash 
             $('.delete-confirm').click(function(event) {
             var form =  $(this).closest("form");
             var name = $(this).data("name");
             event.preventDefault();
             swal({
                 title: `Are you sure you want to delete ${name}?`,
-                text: "Don't worry, it will be trashed.",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -181,36 +184,21 @@
             });
           });
 
-          // Modal for destroying users
-            $('.delete-perm').on('click', function (event) {
-            event.preventDefault();
-            const url = $(this).attr('href');
-            swal({
-                title: 'Are you sure?',
-                text: 'This staff and it`s records will be permanantly deleted!',
-                icon: 'warning',
-                buttons: ["Cancel", "Yes!"],
-            }).then(function(value) {
-                if (value) {
-                    window.location.href = url;
-                }
-            });
-          });
-
-            // Modal for destroying admin
+            // link method for delete/trash
             $('.destroy-confirm').on('click', function (event) {
-          event.preventDefault();
-          const url = $(this).attr('href');
-          swal({
-              title: 'Are you sure?',
-              text: 'Your profile and records will be permanantly deleted!',
-              icon: 'warning',
-              buttons: ["Cancel", "Yes!"],
-          }).then(function(value) {
-              if (value) {
-                  window.location.href = url;
-              }
-          });
+              var name = $(this).data("name");
+              event.preventDefault();
+              const url = $(this).attr('href');
+                swal({
+                    title:  `Are you sure you want to delete ${name}?`,
+                    text: 'This profile and records will be permanantly deleted!',
+                    icon: 'warning',
+                    buttons: ["Cancel", "Yes!"],
+                }).then(function(value) {
+                    if (value) {
+                        window.location.href = url;
+                    }
+              });
         });
   </script>
 </body>
@@ -243,4 +231,6 @@
       });
   });
 </script>
+
+
 

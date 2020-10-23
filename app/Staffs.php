@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 class Staffs extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
 
 
     protected $fillable = [
@@ -15,13 +15,22 @@ class Staffs extends Model
         'experience','status','slug'
     ];
 
-    protected $dates = ['deleted_at'];
+    // protected $dates = ['deleted_at'];
 
     public function user(){
-        return $this->hasMany('App\User');
+        return $this->belongs('App\User');
     }
+
     public function admin_profiles(){
         return $this->belongsTo('App\AdminProfile');
+    }
+
+    public function customers(){
+        return $this->hasMany('App\Customers','id');
+    }
+
+    public function suppliers(){
+        return $this->hasMany('App\Supplier','id');
     }
 
     public static function boot()
@@ -29,7 +38,7 @@ class Staffs extends Model
         parent::boot();
 
         self::creating(function ($model) {
-            $model->id= IdGenerator::generate(['table' => 'staffs', 'length' => 10, 'prefix' =>date('ym')]);
+            $model->uuid= IdGenerator::generate(['table' => 'staffs', 'length' => 10, 'prefix' =>date('ym')]);
         });
     }
 

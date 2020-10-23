@@ -4,10 +4,10 @@
 <div class="main-content">
     <section class="section">
       <div class="section-header">
-        <h1>Create Profile</h1>
+        <h1>Add Employee</h1>
         <div class="section-header-breadcrumb">
           <div class="breadcrumb-item active"><a href="/home">Dashboard</a></div>  
-          <div class="breadcrumb-item">Create Profile</div>
+          <div class="breadcrumb-item">Add Employee</div>
         </div>
       </div>
       @if(count($errors) > 0)
@@ -84,14 +84,16 @@
                                 <input type="text" class="form-control"  name="status">
                               </div>
                               <div class="form-group col-md-6 col-12">
-                                <label for="admin_image">Photo</label>
-                              <input type="file" class="form-control" name="photo">
-                            </div>
+                                <label for="photo">Photo</label>
+                              <input name="photo" id="photo" type="file" class="form-control"
+                              accept="photo/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                              <br><div><img id="output" style="width:100px"></div>
+                              </div>
                           </div>  
                         </div>
                       </div>
                       <div class="card-footer text-center">
-                        <button type="submit" class="btn btn-success">Create Profile</button>
+                        <button type="submit" class="btn btn-success">Add Employee</button>
                       </div>
                     </form>
               </div>

@@ -18,6 +18,14 @@ class AdminProfile extends Model
     }
 
     public function staffs(){
-        return $this->hasMany('App\Staffs');
+        return $this->hasMany('App\Staffs','id');
+    }
+
+    public function customers(){
+        return $this->hasMany('App\Customers','id');
+    }
+
+    public function suppliers(){
+        return $this->hasMany('App\Supplier','id');
     }
 }

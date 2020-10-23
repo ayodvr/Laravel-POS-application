@@ -1,5 +1,8 @@
 <?php
 namespace App\Http\Controllers;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -8,7 +11,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Staffs;
 use App\User;
 use App\AdminProfile;
+use App\Customers;
 use DB;
+
 
 class StaffController extends Controller
 {
@@ -37,10 +42,104 @@ class StaffController extends Controller
 
     public function index()
     {
-        $staffs = Staffs::orderBy('id','asc')->get();
+        // $staffs = Staffs::orderBy('id','asc')->get();
+        // return view('staffs.index')->with('staffs',$staffs);
+        
+        // $recs = array();
+         //$users = DB::table("users")->select("id","name","email","usertype")->get();
+        // array_push($recs,$users);
+        // $staffs = DB::table("staffs")->select("user_id","photo","phone","department","experience")->get();
+        // array_push($recs,$staffs);
+        // dd($recs);
+        // return view('staffs.index')->with('recs',$recs);
 
-        return view('staffs.index')->with('staffs',$staffs);
+        // $users = DB::table("users")->select("id","name","email","usertype")->get();
+        // $staffs = DB::table("staffs")->select("user_id","photo","phone","department","experience")->get();
+        // $merged = $users->merge($staffs);
+        // $recs = $merged->all();
+        // dd($recs);
+        // return view('staffs.index')->with('recs',$recs);
+
+        $recs = array();
+        $staff_rec_arr = array();
+        $users = DB::table("users")->select("id","name","email","status","usertype")->get();
+        foreach ($users as $user){
+            if($user->usertype == "Admin") continue;
+            $staff_rec = Staffs::where("user_id","=",$user->id)->get();
+         
+            if(!empty($staff_rec[0])){
+                $staff_rec_arr["user_id"]    =  $user->id;
+                $staff_rec_arr["id"]         =  $staff_rec[0]->id;
+                $staff_rec_arr["photo"]      =  $staff_rec[0]->photo;
+                $staff_rec_arr["phone"]      =  $staff_rec[0]->phone;
+                $staff_rec_arr["name"]       =  $user->name;
+                $staff_rec_arr["email"]      =  $user->email;
+                $staff_rec_arr["status"]     =  $user->status;
+                $staff_rec_arr["usertype"]   =  $user->usertype;
+                $staff_rec_arr["department"] =  $staff_rec[0]->department; 
+                array_push($recs,$staff_rec_arr);
+           
+            }else{
+                $staff_rec_arr["user_id"]    =  $user->id;
+                $staff_rec_arr["photo"]      =  "";
+                $staff_rec_arr["id"]         =  "";
+                $staff_rec_arr["name"]       =  $user->name;
+                $staff_rec_arr["email"]      =  $user->email;
+                $staff_rec_arr["status"]      = $user->status;
+                $staff_rec_arr["usertype"]   =  $user->usertype;
+                $staff_rec_arr["phone"]      =  "";
+                $staff_rec_arr["department"] =  "";
+                array_push($recs,$staff_rec_arr);
+            }
+            
+           
+        }
+                //dd($recs);
+            //  $data = $this->paginate($recs);
+       
+            return view('staffs.index')->with('recs',$recs);
+        
+       
                                
+    }
+
+    // public function paginate($items, $perPage = 3, $page = null, $options = [])
+    // {
+    //     $pageName = 'page';
+    //     $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+    //     //dd($page);
+    //     $items = $items instanceof Collection ? $items : Collection::make($items);
+    //     //dd($items);
+    //     return new LengthAwarePaginator(
+    //         $items->forPage($page, $perPage)->values(),
+    //         $items->count(),
+    //         $perPage,
+    //         $page,
+    //         [
+    //             'path'     => Paginator::resolveCurrentPath(),
+    //             'pageName' => $pageName,
+    //         ]
+    //     );
+        
+    // }
+
+    public function changeStatus(Request $request, $id)
+    {
+        $rec = User::find($request->id);
+
+        if ($rec->status == 0) {
+            # code...
+            $rec->status=1;
+        }else{
+            $rec->status=0;
+        }
+       if($rec->save()){
+
+        notify()->info(" Status has been changed successfully!","Alert!");
+
+       }
+
+        return redirect()->back();
     }
 
     /**
@@ -127,15 +226,11 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        
-        $staff = Staffs::find($id);
-        //$staff_info = User::find($staff);
-        //dd($staff_info);
-        return view('staffs.show')->with('staff',$staff);
-                                    //->with('staff_info',$staff_info);
-                                    
-                                    
-        
+        $staff = Staffs::find($id);    
+       //dd($staff);  
+
+         return view('staffs.show')->with('staff',$staff);              
+                                 
     }
 
     /**
@@ -219,49 +314,63 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        $staff = Staffs::findorfail($id);
+        $user = User::findorfail($id);
 
-        $staff->delete();
+        $user->delete();
        
-        notify()->success("Staff Trashed!","Success");
+        notify()->success("User Deleted!","Success");
 
         return redirect()->back();
     }
 
-    public function trashed()
-    {
-        $staff = Staffs::onlyTrashed()->get();
+    // public function trashed()
+    // {
+    //     $staff = Staffs::onlyTrashed()->get();
 
-        return view('staffs.trashed')->with('staff',$staff);
-    }
+    //     return view('staffs.trashed')->with('staff',$staff);
+    // }
 
-    public function restore($id)
-    {
-        $staff = Staffs::withTrashed()->where('id',$id)->first();
+    // public function restore($id)
+    // {
+    //     $staff = Staffs::withTrashed()->where('id',$id)->first();
 
-        $staff->restore();
+    //     $staff->restore();
 
-        alert()->success('Success','Staff Restored!');
+    //     alert()->success('Success','Staff Restored!');
 
-        return redirect()->back();
-    }
+    //     return redirect()->back();
+    // }
 
     public function kill($id)
     {
-        $staff = Staffs::withTrashed()->where('id',$id)->first();
+        // $staff = Staffs::withTrashed()->where('id',$id)->first();
 
-        if($staff->photo !== 'noimage.jpg'){
-            //Delete image
-            Storage::delete('public/photo/'.$staff->photo);
-        }
+        // if($staff->photo !== 'noimage.jpg'){
+        //     //Delete image
+        //     Storage::delete('public/photo/'.$staff->photo);
+        // }
 
-        $delete_act = $staff->forceDelete();
+        // $delete_act = $staff->forceDelete();
 
+        // $staff = Staffs::findorfail($id);
+
+        // $delete_act = $staff->delete();
+
+        // if($delete_act)
+        // {
+        //     $del =  DB::select("delete from users where id = '$staff->user_id'");
+        // }
+
+        
+        $user = User::findorfail($id);
+
+        $delete_act = $user->delete();
+        
         if($delete_act)
         {
-            $del =  DB::select("delete from users where id = '$staff->user_id'");
+            $del =  DB::select("delete from staffs where user_id = '$user->id'");
         }
-        notify()->success("Staff permanently Deleted!","Success");
+        notify()->success("Staff Deleted!","Success");
 
         return redirect()->back();
     }

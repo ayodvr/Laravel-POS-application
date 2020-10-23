@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\AdminProfile;
 use App\Staffs;
 use App\User;
+use App\Customers;
 use RealRashid\SweetAlert\Facades\Alert;
 
 

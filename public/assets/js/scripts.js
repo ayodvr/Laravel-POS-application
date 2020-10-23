@@ -625,17 +625,18 @@ $(function () {
   //start up class add
 
   //add default class on body tag
-  $('body').removeClass();
-  $('body').addClass('dark');
-  $('body').addClass('coral-sidebar');
-  $('body').addClass('theme-coral');
-  //set theme default color
-  
-  $(".choose-theme li").removeClass("active");
-  $(".choose-theme li[title|='coral']").addClass("active");
+  jQuery("body").addClass('light');
+  jQuery("body").addClass("purple-sidebar");
+  jQuery("body").addClass("theme-white");
+  // set theme default color
   $(".sidebar-color li").removeClass("active");
-  $(".sidebar-color li[title|='coral']").addClass("active");
-  $(".selectgroup-input[value|='2']").prop("checked", true);
+  $(".sidebar-color li[title|='purple']").addClass("active");
+  $(".choose-theme li").removeClass("active");
+  $(".choose-theme li[title|='white']").addClass("active");
+  //set default dark or light layout(1=light, 2=dark)
+  $(".select-layout[value|='1']").prop("checked", true);
+  //set default dark or light sidebar(1=light, 2=dark)
+  //$(".select-sidebar[value|='2']").prop("checked", true);
 
 });
 

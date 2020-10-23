@@ -76,7 +76,9 @@
                             @enderror
                               </div>
                             <div class="form-group col-md-6 col-12">
-                              <input type="file" name="admin_image">
+                              <input name="admin_image" id="admin_image" type="file" accept="admin_image/*"
+                              onchange ="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                              <br><div><img id="output" style="width:100px"></div>
                             </div>
                           </div>
                           <div class="row">

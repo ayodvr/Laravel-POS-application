@@ -54,7 +54,8 @@
                         <a href="/staffs/restore/{{$staff->id}}" class="btn-sm btn btn-outline-success">Restore</a>
                         </td>
                         <td>
-                        <a href="/staffs/kill/{{$staff->id}}" class="btn-sm btn btn-outline-danger delete-perm">
+                        <a href="/staffs/kill/{{$staff->id}}" data-name ="{{ $staff->user_name }}" 
+                            class="btn-sm btn btn-outline-danger destroy-confirm">
                             Destroy</a>
                         </td>
                         @endforeach

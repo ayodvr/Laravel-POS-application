@@ -26,7 +26,7 @@ Auth::routes();
 
 
 Route ::group(['middleware'=>'auth'],function(){
-
+    Route::get('changeStatus/{id}','StaffController@changeStatus')->name('changeStatus'); 
     Route::get('/staff_dashboard', 'StaffController@staff_dashboard')->name('staffs.staff_dashboard');
     Route::get('/staffs/trashed', 'StaffController@trashed')->name('staffs.trashed');
     Route::get('/staffs/kill/{id}', 'StaffController@kill')->name('staffs.kill');
@@ -45,9 +45,25 @@ Route ::group(['middleware'=>'auth'],function(){
     Route::post('/adminprofile/{id}/update',"AdminProfileController@update")->name('update');
     Route::get('/adminprofile/{id}/destroy',"AdminProfileController@destroy")->name('destroy');
     Route::get('/register_2',"NewUserController@create")->name('register_2');
-    Route::post('/store',"NewUserController@user_store")->name('user_store');
-    Route::post('/checkemail','NewUserController@checkEmail');      
+    Route::post('/store',"NewUserController@user_store")->name('user_store');     
 });
+Route::resource('/sales',"SalesController");
+Route::resource('/receiving',"ReceivingController");
+Route::resource('/products',"ProductsController");
+Route::resource('/customers',"CustomersController");
+Route::resource('/suppliers',"SuppliersController");
+Route::resource('/categories',"CategoryController");
+Route::resource('/inventories',"InventoryController");
+Route::resource('/accounts',"AccountController");
+Route::resource('/transactions',"TransactionsController");
+Route::resource('/expense',"ExpenseController");
+Route::resource('/expense_cat',"ExpenseCategoryController");
+Route::get('/pdf',"CustomersController@Customer_PDF")->name('customer_pdf');
+Route::resource('api/saletemp','SaleApiController');
+Route::resource('api/receivingtemp','ReceivingApiController');
+Route::resource('api/prodtemp','ProductsApiController');
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

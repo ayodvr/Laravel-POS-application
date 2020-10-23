@@ -8,11 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class NewUserController extends Controller
 {
-    
-    // public function create(){
 
-    //     return view('/register_2');
-    // }
 
     public function user_store(Request $request)
     {

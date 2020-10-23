@@ -65,8 +65,7 @@
                           <div class="row">
                             <div class="form-group col-md-6 col-12">
                               <label for="admin_image">Photo</label>
-                            <input type="file" class="form-control" name="admin_image" value="{{$admin->admin_image}}"><br>
-                            <img src="/storage/admin_image/{{$admin->admin_image}}" style="width:80px" alt="admin image">
+                            <input type="file" class="form-control" name="admin_image" value="{{$admin->admin_image}}">
                           </div>
                           </div>
                         </div>

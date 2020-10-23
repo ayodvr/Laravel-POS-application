@@ -4,10 +4,9 @@
 <div class="main-content">
     <section class="section">
       <div class="section-header">
-        <h1>Edit Profile</h1>
-        <div class="section-header-breadcrumb">
-          <div class="breadcrumb-item active"><a href="/dashboard">Dashboard</a></div>  
-          <div class="breadcrumb-item">Edit Profile</div>
+        <h1>Edit Employee Details</h1>
+        <div class="section-header-breadcrumb">  
+          <div class="breadcrumb-item">Edit Employee</div>
         </div>
       </div>
       <div class="section-body">
@@ -76,14 +75,13 @@
                               </div>
                               <div class="form-group col-md-6 col-12">
                                 {{Form::file('photo')}}
-                              <img src="/storage/photo/{{$staff->photo}}" style="width:80px" alt="staff_photo">
                             </div>
                           </div>
                         </div>
                       </div>
                       {{Form::hidden('_method','PUT')}}
                       <div class="card-footer text-center">
-                        {{Form::submit('Update Profile', ['class' =>'btn btn-success'])}}
+                        {{Form::submit('Update Employee', ['class' =>'btn btn-success'])}}
                       </div>
                       {!! Form::close() !!}
               </div>

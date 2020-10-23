@@ -1,11 +1,11 @@
 <?php
   $id = Auth::user()->id;
-  $admin_get = App\AdminProfile::where('user_id','=',$id)->first(); 
+  $admin_get = App\AdminProfile::where('user_id',$id)->first(); 
 ?>
 
 <?php
 $id = Auth::user()->id;
-$staff_get = App\Staffs::where('user_id','=',$id)->first(); 
+$staff_get = App\Staffs::where('user_id',$id)->first(); 
 ?>
 
 <div class="navbar-bg"></div>
@@ -31,7 +31,7 @@ $staff_get = App\Staffs::where('user_id','=',$id)->first();
       </li>
     <li class="dropdown"><a href="#" data-toggle="dropdown"
         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-        <img alt="image" src="{{asset('assets/img/users.png')}}" class="user-img-radious-style">
+        <img alt="image" src="{{asset('assets/img/profile.png')}}" class="user-img-radious-style">
         <span class="d-sm-none d-lg-inline-block"></span></a>
       <div class="dropdown-menu dropdown-menu-right">
         @if(Auth::user()->usertype == 'Admin')
@@ -64,10 +64,64 @@ $staff_get = App\Staffs::where('user_id','=',$id)->first();
       <ul class="sidebar-menu">
         <ul class="sidebar-menu">
           <li class="menu-header">Main</li>
-          <li class="dropdown active">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-home"></i><span>Dashboard</span></a>
+          <li class="dropdown">
+            <a href="/dashboard"><i class="fas fa-home"></i><span>Dashboard</span></a>
+          </li>
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-align-justify"></i><span>Products</span></a>
+              <ul class="dropdown-menu">
+              <li><a class="nav-link" href="{{route('categories.index')}}">Category</a></li>
+              <li><a class="nav-link" href="{{route('categories.create')}}">Add Category</a></li>
+              <li><a class="nav-link" href="{{route('products.index')}}">Products</a></li>
+              <li><a class="nav-link" href="{{route('products.create')}}">Add product</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-industry"></i><span>Suppliers</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{route('suppliers.index')}}">View Suppliers</a></li>
+                <li><a class="nav-link" href="{{route('suppliers.create')}}">Add Suppliers</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Customers</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{route('customers.index')}}">View Customers</a></li>
+                <li><a class="nav-link" href="{{route('customers.create')}}">Add Customers</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-credit-card"></i><span>Purchase</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{route('receiving.index')}}">Add Purchase</a></li>
+              </ul>
+              </li>
+          <li class="dropdown">
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-cart-arrow-down"></i><span>Sales</span></a>
+          <ul class="dropdown-menu">
+            <li><a class="nav-link" href="{{route('sales.index')}}">Add Sales</a></li>
+          </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-university"></i><span>Account</span></a>
             <ul class="dropdown-menu">
-              <li class="active"><a class="nav-link" href="/dashboard">Home</a></li>
+            <li><a class="nav-link" href="{{route('accounts.index')}}">view Accounts</a></li>
+            <li><a class="nav-link" href="{{route('transactions.index')}}">Transactions</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-dollar-sign"></i><span>Expense</span></a>
+            <ul class="dropdown-menu">
+            <li><a class="nav-link" href="{{route('expense.index')}}">View Expense</a></li>
+            <li><a class="nav-link" href="{{route('expense_cat.create')}}">Expense Category</a></li>
+            <li><a class="nav-link" href="{{route('expense.create')}}">Add Expense</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Employees</span></a>
+            <ul class="dropdown-menu">
+            <li><a class="nav-link" href="/staffs">View Employees</a></li>
+            <li><a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal">Add Employee</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -85,29 +139,22 @@ $staff_get = App\Staffs::where('user_id','=',$id)->first();
             </ul>
           </li>
           <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Staffs</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check-alt"></i><span>Report</span></a>
             <ul class="dropdown-menu">
-            <li><a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal">Add Staff</a></li>
-            <li><a class="nav-link" href="/staffs">View Staffs</a></li>
-            </ul>
-          </li><li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Staffs</span></a>
-            <ul class="dropdown-menu">
-            <li><a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal">Add Staff</a></li>
-            <li><a class="nav-link" href="/staffs">View Staffs</a></li>
+            <li><a class="nav-link" href="#">Sales Report</a></li>
+            <li><a class="nav-link" href="#">Purchase Report</a></li>
             </ul>
           </li>
           {{-- <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fab fa-app-store"></i><span>Apps</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fab fa-gg"></i><span>Apps</span></a>
             <ul class="dropdown-menu">
-              <li><a class="fas-fa-comments" href="/chatify">Chat</a></li>
-              <li><a class="nav-link" href="/calendar">Calendar</a></li>
+              <li><a class="fas-fa-comments" href="/chatify" target="_blank">Chat</a></li>
             </ul>
           </li> --}}
           <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i><span>Settings</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="/staffs/trashed">Restore Staffs</a></li>
+              {{-- <li><a class="nav-link" href="/staffs/trashed">Restore Staffs</a></li> --}}
             </ul>
           </li>
         </ul>
@@ -128,13 +175,28 @@ $staff_get = App\Staffs::where('user_id','=',$id)->first();
         <ul class="sidebar-menu">
           <li class="menu-header">Main</li>
           <li class="dropdown active">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-home"></i><span>Dashboard</span></a>
+            <a href="/home"><i class="fas fa-home"></i><span>Dashboard</span></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-align-justify"></i><span>Products</span></a>
             <ul class="dropdown-menu">
-              <li class="active"><a class="nav-link" href="/home">Home</a></li>
+            <li><a class="nav-link" href="{{route('categories.index')}}">Category</a></li>
+            {{-- <li><a class="nav-link" href="{{route('categories.create')}}">Add Category</a></li> --}}
+            <li><a class="nav-link" href="{{route('products.index')}}">Product List</a></li>
+            {{-- <li><a class="nav-link" href="{{route('products.create')}}">Add product</a></li> --}}
             </ul>
           </li>
           <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i><span>Profile</span></a>
+            <a href="{{route('suppliers.index')}}"><i class="fas fa-industry"></i><span>Suppliers</span></a>
+          </li>
+          <li class="dropdown">
+            <a href="{{route('customers.index')}}"><i class="fas fa-users"></i><span>Customers</span></a>
+          </li>
+        <li class="dropdown">
+        <a href="{{route('sales.index')}}"><i class="fas fa-cart-arrow-down"></i><span>Sales</span></a>
+        </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i><span>Profile</span></a>
             <ul class="dropdown-menu">
                 @if(!empty($staff_get))
                 <li><a class="nav-link" href="/staffs/{{$staff_get->id}}/edit">Update</a></li>
