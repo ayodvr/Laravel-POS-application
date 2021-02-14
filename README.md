@@ -16,10 +16,10 @@ node Modules
 Features:
 
 Stock Adding and Managing
-Customer Management
-Supplier Management
-Sales Adding
-Purchases Adding
+Customer Management, 
+Supplier Management,
+Sales Adding,
+Purchases Adding,
 POS(module)
 Employee management system
 Sales and purchases report
