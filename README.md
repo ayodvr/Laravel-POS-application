@@ -5,27 +5,27 @@ the maximum satisfation and a wonderful user experience.
 
 Techstack:
 
-Laravel 7
-Angular
-JS
-Laravel Mix
-Bootstrap
-webpack
-node Modules
+-- Laravel 7
+-- Angular
+-- JS
+-- Laravel Mix
+-- Bootstrap
+-- webpack
+-- node Modules
 
 Features:
 
 Stock Adding and Managing
-Customer Management, 
-Supplier Management,
-Sales Adding,
-Purchases Adding,
-POS(module)
-Employee management system
-Sales and purchases report
-Accounts / Transactions
-Income and Expenses
-Invoicing 
+-- Customer Management, 
+-- Supplier Management,
+-- Sales Adding,
+-- Purchases Adding,
+-- POS(module)
+-- Employee management system
+-- Sales and purchases report
+-- Accounts / Transactions
+-- Income and Expenses
+-- Invoicing 
 
 
 -- Run Composer install 
