@@ -15,18 +15,18 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('phone_number');
-            $table->string('avatar');
-            $table->string('address');
-            $table->string('city');
-            $table->string('state');
-            $table->string('zip');
-            $table->string('company_name');
-            $table->string('account');
-            $table->decimal('prev_balance');
-            $table->decimal('payment');
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('avatar')->default('noimage.jpg');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('account')->nullable();
+            $table->decimal('prev_balance')->nullable();
+            $table->decimal('payment')->nullable();
             $table->timestamps();
         });
     }

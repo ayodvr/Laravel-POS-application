@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\AdminProfile;
 use App\Staffs;
 use App\User;
 use App\Customers;
+use App\Product;
+use App\Supplier;
+use App\Sale;
+use DB;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -25,16 +32,51 @@ class AdminProfileController extends Controller
     {
         if(Auth()->user()->usertype == 'Admin'){
 
-            return view("adminprofile.dashboard");
+            $id = Auth::user()->id;
+            $items = Product::where('type', 1)->count();
+            $customers = Customers::count();
+            $staff = Staffs::count();
+            $sales = DB::table('sales')->where('user_id', $id)->sum('payment');
+            // $incomeexpensechart = $this->incomeExpenseChart();
+            return view("adminprofile.dashboard")
+            ->with('items', $items)
+            ->with('staff', $staff)
+            ->with('customers', $customers)
+            ->with('sales', $sales);
+            // ->with('incomeexpensechart', $incomeexpensechart);
 
-        }else
-        {
-            alert()->warning("Warning","Access Denied!");
-                
-            return redirect()->back();
         }
-        
                                     
+    }
+
+    public function getMonthListFromDate(Carbon $start)
+    {
+        foreach (CarbonPeriod::create($start, '1 month', Carbon::today()) as $month){
+            $months[$months[$month->format('m-Y')]] = $month->format('F Y');
+        }
+            return $months;
+    }
+
+    public function incomeExpenseChart()
+    {
+        $monthsOfYear = $this->getMonthListFromDate();
+        $incomes = Sale::whereBetween('created_at', [ $monthsOfYear[0], $monthsOfYear[11]])->get();
+        $expenses = Receiving::whereBetween('created_at', [ $monthsOfYear[0], $monthsOfYear[11]])->get();
+        $chartArray = array();
+        foreach ($monthsOfYear as $month) {
+            $monthlyincome = "0";
+            $monthlyexpense = "0";
+            $monthlyincome = Sale::whereBetween('created_at', [ $month ])->count();
+            $monthlyexpense = Receiving::whereBetween('created_at', [ $month ])->count();
+            $chart = [
+                // 'y' => $month,
+                'a' => $monthlyexpense,
+                'b'=>$monthlyincome,
+            ];
+            $chartArray[] =  $chart;
+           
+        }
+        return $chartArray;
     }
 
     public function index()
@@ -149,7 +191,7 @@ class AdminProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-       //dd($request->all());
+       dd($request->all());
         $this->validate($request,[
 
             'address' => 'required',

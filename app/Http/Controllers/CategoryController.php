@@ -120,7 +120,7 @@ class CategoryController extends Controller
     {
         $this->validate($request,[
 
-                'name'=>'required|max:185'
+                'cat_name'=>'required|max:185'
             ]);
     
                  //Handle file uploads
@@ -153,7 +153,7 @@ class CategoryController extends Controller
     
                 }
     
-                return redirect()->back();
+                return redirect()->route('categories.index');
     }
 
     /**

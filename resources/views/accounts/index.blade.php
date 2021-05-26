@@ -19,7 +19,7 @@
                     {{-- <h4>Category List</h4> --}}
                   </div>
                   <div class="pull-right" style="margin-right:25px;margin-top:10px;">
-                    <a href="{{route('accounts.create')}}" class="btn btn-outline-primary pull-right">Add Account</a>
+                    <a href="{{route('accounts.create')}}" class="btn btn-outline-success pull-right">Add Account</a>
                   </div>
               <div class="card-body">
                 <div class="table-responsive">

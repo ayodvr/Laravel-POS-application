@@ -58,7 +58,7 @@ $staff_get = App\Staffs::where('user_id',$id)->first();
       <div class="sidebar-brand">
         <a href="/dashboard">
           {{-- <img alt="image" src="{{asset('assets/img/logo.png')}}" class="header-logo" /> --}}
-          <span class="logo-name">Grexa</span>
+          <span class="logo-name">StockBase &#174</span>
         </a>
       </div>
       <ul class="sidebar-menu">
@@ -102,13 +102,13 @@ $staff_get = App\Staffs::where('user_id',$id)->first();
             <li><a class="nav-link" href="{{route('sales.index')}}">Add Sales</a></li>
           </ul>
           </li>
-          <li class="dropdown">
+          {{-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-university"></i><span>Account</span></a>
             <ul class="dropdown-menu">
             <li><a class="nav-link" href="{{route('accounts.index')}}">view Accounts</a></li>
             <li><a class="nav-link" href="{{route('transactions.index')}}">Transactions</a></li>
             </ul>
-          </li>
+          </li> --}}
           <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-dollar-sign"></i><span>Expense</span></a>
             <ul class="dropdown-menu">
@@ -141,8 +141,8 @@ $staff_get = App\Staffs::where('user_id',$id)->first();
           <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check-alt"></i><span>Report</span></a>
             <ul class="dropdown-menu">
-            <li><a class="nav-link" href="#">Sales Report</a></li>
-            <li><a class="nav-link" href="#">Purchase Report</a></li>
+            <li><a class="nav-link" href="{{route('salesreport.index')}}">Sales Report</a></li>
+            <li><a class="nav-link" href="{{route('receivingsreport.index')}}">Purchase Report</a></li>
             </ul>
           </li>
           {{-- <li class="dropdown">
@@ -151,12 +151,12 @@ $staff_get = App\Staffs::where('user_id',$id)->first();
               <li><a class="fas-fa-comments" href="/chatify" target="_blank">Chat</a></li>
             </ul>
           </li> --}}
-          <li class="dropdown">
+          {{-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i><span>Settings</span></a>
             <ul class="dropdown-menu">
               {{-- <li><a class="nav-link" href="/staffs/trashed">Restore Staffs</a></li> --}}
             </ul>
-          </li>
+          </li> --}}
         </ul>
     </aside>
   </div>

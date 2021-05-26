@@ -1,9 +1,17 @@
 @extends('layouts.sale')
 @section('content')
-<div class="main-content"  ng-app="tutapos">
+<div class="main-content"  ng-app="tutapos" ng-cloak>
     <section class="section">
+        <div class="section-header">
+            <h1>Add Sales</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="#">Sales</a></div>
+              <div class="breadcrumb-item">Add Sales</div>
+            </div>
+          </div>
       <div class="section-body">
-        <div class="row" ng-controller="SearchProductCtrl">
+        <div class="row" ng-controller="SearchProductCtrl" ng-cloak>
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -50,7 +58,7 @@
                             </select>
                         </div>
                         <div>
-                            <button class="btn btn-outline-success" style="margin:2px;height:43px"><i class="fas fa-user-plus"></i></button>
+                            <a href="#" data-toggle="modal" data-target="#customerModal" style="margin:2px;height:43px" class="btn btn-success"><i class="fas fa-user-plus" style="margin-top:10px"></i></a>
                         </div> 
                     </div>
                     <div class="card-body p-0">
@@ -90,7 +98,7 @@
                             </p>
                          </div>
                         </div>
-                        <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
+                        {{-- <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
                             <div class="col-sm-4">
                                 <p>Flat Discount</p>
                             </div>
@@ -101,8 +109,8 @@
                             <div class="col-sm-4 text-right">
                                 <p class="form-control-static"><b>@{{ (sum(saletemp)*add_discount_percent /100) + add_discount  | currency}}</b></p>
                             </div> 
-                         </div>
-                            <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
+                         </div> --}}
+                            {{-- <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
                                 <div class="col-sm-4">
                                     <p>Discount (%)</p>
                                 </div>
@@ -110,7 +118,7 @@
                                     <input type="number" style="width: 100px;height:20px" class="form-control" 
                                     name="discount_percent" id="add_discount_percent" ng-model="add_discount_percent" ng-init="add_discount_percent =0" required/>
                                 </div>   
-                        </div>
+                        </div> --}}
                             <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
                                 <div class="col-sm-4">
                                     <p>Payment</p>
@@ -123,7 +131,7 @@
                                     <p class="form-control-static"><b>@{{ add_payment | currency}}</b></p>    
                                 </div>
                             </div>
-                            <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
+                            {{-- <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
                                 <div class="col-sm-4">
                                     <p>Tax</p>
                                 </div>
@@ -142,9 +150,9 @@
                                     </p>
                                     </div>  
                                     
-                                </div>
+                                </div> --}}
                             <div class="text-center">
-                                <button class="btn btn-lg btn-success" type="submit" style="width:90%;margin:15px">Pay</button>
+                                <button class="btn btn-lg btn-success" type="submit" style="width:90%;margin:15px">Make Payment</button>
                             </div>
                       </div>
                     </div>
@@ -154,118 +162,58 @@
         </div>
       </div>
     </section>
-    <div class="settingSidebar">
-        <a href="javascript:void(0)" class="settingPanelToggle"> <i
-            class="fa fa-spin fa-cog"></i>
-        </a>
-        <div class="settingSidebar-body ps-container ps-theme-default">
-            <div class=" fade show active">
-                <div class="setting-panel-header">Theme Customizer</div>
-                <div class="p-15 border-bottom">
-                    <h6 class="font-medium m-b-10">Theme Layout</h6>
-                    <div class="selectgroup layout-color w-50">
-                        <label> <span class="control-label p-r-20">Light</span>
-                            <input type="radio" name="custom-switch-input" value="1"
-                            class="custom-switch-input" checked> <span
-                            class="custom-switch-indicator"></span>
-                        </label>
-                    </div>
-                    <div class="selectgroup layout-color  w-50">
-                        <label> <span class="control-label p-r-20">Dark&nbsp;</span>
-                            <input type="radio" name="custom-switch-input" value="2"
-                            class="custom-switch-input"> <span
-                            class="custom-switch-indicator"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="p-15 border-bottom">
-                <h6 class="font-medium m-b-10">Sidebar Colors</h6>
-                <div class="sidebar-setting-options">
-                    <ul class="sidebar-color list-unstyled mb-0">
-                        <li title="white" class="active">
-                            <div class="white"></div>
-                        </li>
-                        <li title="blue">
-                            <div class="blue"></div>
-                        </li>
-                        <li title="coral">
-                            <div class="coral"></div>
-                        </li>
-                        <li title="purple">
-                            <div class="purple"></div>
-                        </li>
-                        <li title="allports">
-                            <div class="allports"></div>
-                        </li>
-                        <li title="barossa">
-                            <div class="barossa"></div>
-                        </li>
-                        <li title="fancy">
-                            <div class="fancy"></div>
-                        </li>
-                    </ul>
-                </div>
-    
-            </div>
-            <div class="p-15 border-bottom">
-                <h6 class="font-medium m-b-10">Theme Colors</h6>
-                <div class="theme-setting-options">
-                    <ul class="choose-theme list-unstyled mb-0">
-                        <li title="white" class="active">
-                            <div class="white"></div>
-                        </li>
-                        <li title="blue">
-                            <div class="blue"></div>
-                        </li>
-                        <li title="coral">
-                            <div class="coral"></div>
-                        </li>
-                        <li title="purple">
-                            <div class="purple"></div>
-                        </li>
-                        <li title="allports">
-                            <div class="allports"></div>
-                        </li>
-                        <li title="barossa">
-                            <div class="barossa"></div>
-                        </li>
-                        <li title="fancy">
-                            <div class="fancy"></div>
-                        </li>
-                        <li title="cyan">
-                            <div class="cyan"></div>
-                        </li>
-                        <li title="orange">
-                            <div class="orange"></div>
-                        </li>
-                        <li title="green">
-                            <div class="green"></div>
-                        </li>
-                        <li title="red">
-                            <div class="red"></div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="p-15 border-bottom">
-                <h6 class="font-medium m-b-10">Layout Options</h6>
-                <div class="theme-setting-options">
-                    <label> <span class="control-label p-r-20">Compact
-                            Sidebar Menu</span> <input type="checkbox"
-                        name="custom-switch-checkbox" class="custom-switch-input"
-                        id="mini_sidebar_setting"> <span
-                        class="custom-switch-indicator"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="mt-3 mb-3 align-center">
-                <a href="#"
-                    class="btn btn-icon icon-left btn-outline-primary btn-restore-theme">
-                    <i class="fas fa-undo"></i> Restore Default
-                </a>
-            </div>
-        </div>
-    </div>
   </div>
   @endsection
+
+  <div id="customerModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+            <div class="modal-body">
+              <div class="text-center">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div> 
+              <div class="card">
+                <div class="card-header card-header-auth">
+                  <h4 style="text-align: center">{{ __('Add Customer') }}</h4>
+                </div>
+                <div class="card-body">
+                  <form method="POST" action="{{route('customers.store')}}">
+                      @csrf
+                      <div class="row">
+                        <div class="form-group col-md-6 col-12">
+                          <label>Full Name</label>
+                        <input type="text" class="form-control" name="name">
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                          <label>Email</label>
+                          <input type="email" class="form-control" name="email">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-6 col-12">
+                          <label>Phone</label>
+                          <input type="text" class="form-control" name="phone_number">
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                          <label for="address">Address</label>
+                          <input type="text" class="form-control" name="address">
+                        </div>
+                      </div>
+                      <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-success">Add Customer</button>
+                      </div>
+                  </form>
+                </div>
+              </div>
+              </div>
+              </div>
+           </div>
+          </div>
+        </div>

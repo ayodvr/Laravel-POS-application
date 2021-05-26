@@ -33,7 +33,8 @@
                         @endif
                       </div>
                     </div>
-                    <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror" name="password" tabindex="2" required autocomplete="current-password">
+                    <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror" name="password" tabindex="2" required autocomplete="current-password"
+                    id="txtPassportNumber" onkeyup="EnableDisable(this)">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -47,26 +48,26 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-lg btn-block btn-auth-color" tabindex="4">
+                    <button type="submit" id="btnSubmit" class="btn btn-lg btn-block btn-info" tabindex="4" disabled="disabled">
                       {{ __('Login') }}
                     </button>
                   </div>
                 </form>
-                <div class="text-center mt-4 mb-3">
+                {{-- <div class="text-center mt-4 mb-3">
                   <div class="text-job text-muted">Login With Social</div>
                 </div>
                 <div class="row sm-gutters">
                   <div class="col-6">
-                    <a class="btn btn-block btn-social btn-facebook">
+                  <a href="{{route('login.facebook')}}" class="btn btn-block btn-social btn-facebook">
                       <span class="fab fa-facebook"></span> Facebook
                     </a>
                   </div>
                   <div class="col-6">
-                    <a class="btn btn-block btn-social btn-google">
+                  <a href="{{route('login.google')}}" class="btn btn-block btn-social btn-google">
                       <span class="fab fa-google"></span> Google
                     </a>
                   </div>
-                </div>
+                </div> --}}
               </div>
               {{-- <div class="mt-5 text-muted text-center" style="margin-bottom:15px ">
                 Don't have an account? <a href="/register">Create One</a>
@@ -77,4 +78,20 @@
       </div>
     </section>
   </div>
-  @endsection
+  <script type="text/javascript">
+    function EnableDisable(txtPassportNumber) {
+        //Reference the Button.
+        var btnSubmit = document.getElementById("btnSubmit");
+ 
+        //Verify the TextBox value.
+        if (txtPassportNumber.value.length > 6 ) {
+            //Enable the TextBox when TextBox has value.
+            btnSubmit.disabled = false;
+        } else {
+            //Disable the TextBox when TextBox is empty.
+            btnSubmit.disabled = true;
+        }
+    };
+</script>
+@endsection
+  

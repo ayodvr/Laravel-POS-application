@@ -104,7 +104,7 @@ class SalesController extends Controller
             $payment->user_id = Auth::user()->id;
             $payment->save();
         }
-
+        
         foreach ($saleItems as $value) {
             $saleItemsData = new SaleItem;
             $saleItemsData->sale_id = $sales->id;
@@ -133,7 +133,7 @@ class SalesController extends Controller
          //delete all data on SaleTemp model
          SaleTemp::truncate();
          $itemssale = SaleItem::where('sale_id', $saleItemsData->sale_id)->get();
-         notify()->success("You have successfully added sales!","Success");
+        //  notify()->success("You have successfully added sales!","Success");
              return view('sales.complete')
                  ->with('sales', $sales)
                  ->with('saleItemsData', $saleItemsData)

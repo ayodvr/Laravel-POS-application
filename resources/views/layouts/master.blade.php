@@ -6,8 +6,6 @@
   <title>
       @yield('title')
     </title>
-
-
   <link rel="stylesheet" href="{{asset('assets/css/app.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/pretty-checkbox/pretty-checkbox.min.css')}}">
   <link rel="stylesheet" href="{{ asset('css/iziToast.css') }}">
@@ -26,7 +24,7 @@
   <link rel="stylesheet" href="{{asset('assets/bundles/jquery-selectric/selectric.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/weather-icon/css/weather-icons-wind.min.css')}}">
   {{-- <link href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css')}}" rel="stylesheet" /> --}}
-  <link rel='shortcut icon' type='image/x-icon' href='{{asset('assets/img/favicon.ico')}}' />
+  <link rel='shortcut icon' type='image/x-icon' href='{{asset('assets/img/Ico/sales.ico')}}' />
 </head>
 
 <body>
@@ -34,113 +32,6 @@
                     @yield('content')
                     @include('includes.footer')
 
-     <div id="registerModal" class="modal fade">
-                      <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                              <div class="modal-body">
-                                <div class="text-center">
-                                  <div class="alert alert-success" style="display:none"></div>   
-                                  <div class="alert alert-danger" style="display:none">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div> 
-                                </div>
-                                  <div class="card">
-                                    <div class="card-header card-header-auth">
-                                      <h4>{{ __('Register') }}</h4>
-                                    </div>
-                                    <div class="card-body">
-                                      <form method="POST" id="regModal">
-                                          @csrf
-                                          <div class="form-group">
-                                            <label for="name">{{ __('Name') }}</label>
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
-                                            @error('name')
-                                              <span class="invalid-feedback" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                              </span>
-                                          @enderror
-                                          </div>
-                                        <div class="row">
-                                          <div class="form-group col-6">
-                                            <label for="email">{{ __('E-Mail Address') }}</label>
-                                          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
-                                          @error('email')
-                                              <span class="invalid-feedback" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                              </span>
-                                          @enderror
-                                          <div class="invalid-feedback">
-                                          </div>
-                                          </div>
-                                          
-                                          <div class="form-group col-6">
-                                            <label for="email">{{ __('UserType') }}</label>
-                                          <select id="usertype" class="form-control @error('usertype') is-invalid @enderror" name="usertype">
-                                                          <option value="">Select User</option>
-                                                          <option value="User">User</option>                 
-                                          </select>
-                                          @error('usertype')
-                                              <span class="invalid-feedback" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                              </span>
-                                          @enderror
-                                          <div class="invalid-feedback">
-                                          </div>
-                                          </div>
-                                        
-                                        </div>
-                                        <div class="row">
-                                          <div class="form-group col-6">
-                                            <label for="password" class="d-block">{{ __('Password') }}</label>
-                                            <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror" data-indicator="pwindicator"
-                                              name="password" autocomplete="new-password">
-                                              @error('password')
-                                                  <span class="invalid-feedback" role="alert">
-                                                      <strong>{{ $message }}</strong>
-                                                  </span>
-                                              @enderror
-                                            <div id="pwindicator" class="pwindicator">
-                                              <div class="bar"></div>
-                                              <div class="label"></div>
-                                            </div>
-                                          </div>
-                                          <div class="form-group col-6">
-                                            <label for="password-confirm" class="d-block">{{ __('Confirm Password') }}</label>
-                                            <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" data-indicator="pwindicator" 
-                                            name="password_confirmation" autocomplete="new-password">
-                                            @error('password')
-                                                  <span class="invalid-feedback" role="alert">
-                                                      <strong>{{ $message }}</strong>
-                                                  </span>
-                                              @enderror
-                                              <div id="pwindicator" class="pwindicator">
-                                                <div class="bar"></div>
-                                                <div class="label"></div>
-                                              </div>
-                                          </div>
-                                        </div>
-                                        <div class="form-group">
-                                          <button type="submit" class="btn btn-auth-color btn-lg btn-block">
-                                          {{ __('Register') }}
-                                          </button>
-                                        </div>
-                                      </form>
-                                    </div>
-                                  </div>
-                                </div>
-                             </div>
-                            </div>
-                          </div>
-
-
- 
 <script src="{{asset('assets/js/app.min.js')}}"></script>
   <script src="{{asset('assets/bundles/datatables/datatables.min.js')}}"></script>
   <script src="{{asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -153,6 +44,11 @@
   {{-- <script>
     $('.select2').select2();
 </script> --}}
+<script>
+$(function() {
+   $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 <script src="{{asset('assets/bundles/select2/dist/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/bundles/jquery-selectric/jquery.selectric.min.js')}}"></script>
   <script src="{{asset('assets/bundles/apexcharts/apexcharts.min.js')}}"></script>
@@ -162,6 +58,7 @@
   <script src="{{asset('assets/bundles/summernote/summernote-bs4.min.js')}}"></script>
   <script src="{{asset('js/angular.min.js')}}"></script>
   <script src="{{asset('js/automate.js')}}"></script>
+  <script src="{{asset('js/protractor.js')}}"></script>
   <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js')}}"></script>
   <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
   @include('sweetalert::alert')
@@ -214,6 +111,9 @@
               url: "{{ url('/store')}}",
               method: "post",
               data:$('#regModal').serialize(),
+              beforeSend:function(){  
+                $('#insert').val("Registering");  
+            },
               success:function(data){
                 //console.log(result);
                 $('#regModal')[0].reset();
@@ -232,5 +132,104 @@
   });
 </script>
 
-
-
+<div id="registerModal" class="modal fade">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <div class="alert alert-success" style="display:none"></div>   
+              <div class="alert alert-danger" style="display:none">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div> 
+            </div>
+              <div class="card">
+                <div class="card-header card-header-auth">
+                  <h4>{{ __('Register') }}</h4>
+                </div>
+                <div class="card-body">
+                  <form method="POST" id="regModal">
+                      @csrf
+                      <div class="form-group">
+                        <label for="name">{{ __('Name') }}</label>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
+                        @error('name')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                      </div>
+                    <div class="row">
+                      <div class="form-group col-6">
+                        <label for="email">{{ __('E-Mail Address') }}</label>
+                      <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
+                      @error('email')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                      <div class="invalid-feedback">
+                      </div>
+                      </div>
+                      <div class="form-group col-6">
+                        <label for="email">{{ __('UserType') }}</label>
+                      <select id="usertype" class="form-control @error('usertype') is-invalid @enderror" name="usertype">
+                                      <option value="">Select User</option>
+                                      <option value="User">User</option>                 
+                      </select>
+                      @error('usertype')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                      <div class="invalid-feedback">
+                      </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-6">
+                        <label for="password" class="d-block">{{ __('Password') }}</label>
+                        <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror" data-indicator="pwindicator"
+                          name="password" autocomplete="new-password">
+                          @error('password')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                        <div id="pwindicator" class="pwindicator">
+                          <div class="bar"></div>
+                          <div class="label"></div>
+                        </div>
+                      </div>
+                      <div class="form-group col-6">
+                        <label for="password-confirm" class="d-block">{{ __('Confirm Password') }}</label>
+                        <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" data-indicator="pwindicator" 
+                        name="password_confirmation" autocomplete="new-password">
+                        @error('password')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                          <div id="pwindicator" class="pwindicator">
+                            <div class="bar"></div>
+                            <div class="label"></div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" name="insert" id="insert" value="Register" class="btn btn-auth-color btn-lg btn-block">
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+         </div>
+        </div>
+      </div>

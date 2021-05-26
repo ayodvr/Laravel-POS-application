@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="{{asset('assets/bundles/jquery-selectric/selectric.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/weather-icon/css/weather-icons-wind.min.css')}}">
   {{-- <link href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css')}}" rel="stylesheet" /> --}}
-  <link rel='shortcut icon' type='image/x-icon' href='{{asset('assets/img/favicon.ico')}}' />
+  <link rel='shortcut icon' type='image/x-icon' href='{{asset('assets/img/Ico/sales.ico')}}' />
 </head>
 
 <body>

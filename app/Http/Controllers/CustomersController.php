@@ -7,7 +7,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Staffs;
 use App\User;
 use App\AdminProfile;
-
 use DB;
 use App\Customers;
 
@@ -25,31 +24,31 @@ class CustomersController extends Controller
         
     }
 
-    public function Customer_PDF()
-    {
-        $customer_pdf = Customers::orderBy('id','desc')->get();
+    // public function Customer_PDF()
+    // {
+    //     $customer_pdf = Customers::orderBy('id','desc')->get();
       
-        $filename = 'Customers_list.pdf';
-        $mpdf = new \Mpdf\Mpdf([
-            'margin-left' => 10,
-            'margin-left' => 10,
-            'margin-left' => 15,
-            'margin-left' => 20,
-            'margin-left' => 10,
-            'margin-left' => 10
-        ]);
+    //     $filename = 'Customers_list.pdf';
+    //     $mpdf = new \Mpdf\Mpdf([
+    //         'margin-left' => 10,
+    //         'margin-left' => 10,
+    //         'margin-left' => 15,
+    //         'margin-left' => 20,
+    //         'margin-left' => 10,
+    //         'margin-left' => 10
+    //     ]);
 
-        $html = \View::make('customers.customerPDF')->with('customer_pdf',$customer_pdf);
-        $html = $html->render();
+    //     $html = \View::make('customers.customerPDF')->with('customer_pdf',$customer_pdf);
+    //     $html = $html->render();
 
-        $mpdf->setHeader('xxxx|Customers|{PAGENO}');
-        $mpdf->setFooter('Copyright StockBase Inc');
-        $stylesheet = file_get_contents(url('css/customer_pdf.css'));
-        $mpdf->WriteHTML($stylesheet,1);
-        $mpdf->WriteHTML($html);
-        $mpdf->Output($filename,'I');
+    //     $mpdf->setHeader('xxxx|Customers|{PAGENO}');
+    //     $mpdf->setFooter('Copyright StockBase Inc');
+    //     $stylesheet = file_get_contents(url('css/customer_pdf.css'));
+    //     $mpdf->WriteHTML($stylesheet,1);
+    //     $mpdf->WriteHTML($html);
+    //     $mpdf->Output($filename,'I');
         
-    }
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -72,15 +71,15 @@ class CustomersController extends Controller
         $this->validate($request,[
          
             'avatar'=>'image|nullable|max:1999',
-            'name'=>'required|max:185',
-            'email'=>'required|max:100',
-            'address'=>'required|max:185',
-            'city'=>'required|max:185',
-            'state'=>'required|max:185',
-            'company_name'=>'required|max:50',
-            'account'=>'required|max:50',
-            'zip'=>'required|max:10',
-            'phone_number'=>'required|max:20',
+            'name'=>'max:185',
+            'email'=>'max:100',
+            'address'=>'max:185',
+            'city'=>'max:185',
+            'state'=>'max:185',
+            'company_name'=>'max:150',
+            'account'=>'max:150',
+            'zip'=>'max:10',
+            'phone_number'=>'max:20',
             'prev_balance'=>'max:999999|numeric',
             'payment'=>'max:999999|numeric|nullable'
         ]);
@@ -162,15 +161,15 @@ class CustomersController extends Controller
     {
         $this->validate($request,[
 
-            'name'=>'required|max:185',
-            'email'=>'required|max:100',
-            'address'=>'required|max:185',
-            'city'=>'required|max:185',
-            'state'=>'required|max:185',
-            'company_name'=>'required|max:50',
-            'account'=>'required|max:50',
-            'zip'=>'required|max:10',
-            'phone_number'=>'required|max:20',
+            'name'=>'max:185',
+            'email'=>'max:100',
+            'address'=>'max:185',
+            'city'=>'max:185',
+            'state'=>'max:185',
+            'company_name'=>'max:50',
+            'account'=>'max:50',
+            'zip'=>'max:10',
+            'phone_number'=>'max:20',
             'prev_balance'=>'max:999999|numeric',
             'payment'=>'max:999999|numeric|nullable'
         ]);
@@ -215,7 +214,7 @@ class CustomersController extends Controller
                 notify()->error("There was a problem creating your profile!","Error");
                }
 
-            return redirect()->back();
+               return redirect()->route('customers.index');
             
     }
 

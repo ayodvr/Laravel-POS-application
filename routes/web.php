@@ -24,6 +24,13 @@ Route::get('/', function (){
 
 Auth::routes();
 
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+
+// Route::get('/payment-order', function (){
+//     return view('sales.payments');
+// });
+
 
 Route ::group(['middleware'=>'auth'],function(){
     Route::get('changeStatus/{id}','StaffController@changeStatus')->name('changeStatus'); 
@@ -37,7 +44,6 @@ Route ::group(['middleware'=>'auth'],function(){
 Route ::group(['middleware'=>'auth'],function(){
 
     Route::get('/dashboard',"AdminProfileController@admin_dashboard")->name('dashboard');
-    Route::get('/index',"AdminProfileController@index")->name('index');
     Route::get('/adminprofile/create',"AdminProfileController@create")->name('create');
     Route::get('/adminprofile/{id}/edit',"AdminProfileController@edit")->name('edit');
     Route::get('/adminprofile/{id}',"AdminProfileController@show")->name('show');
@@ -62,8 +68,14 @@ Route::get('/pdf',"CustomersController@Customer_PDF")->name('customer_pdf');
 Route::resource('api/saletemp','SaleApiController');
 Route::resource('api/receivingtemp','ReceivingApiController');
 Route::resource('api/prodtemp','ProductsApiController');
+Route::resource('/receivingsreport', 'ReceivingsReportController');
+Route::resource('/salesreport', 'SaleReportController');
 
+Route::get('login/facebook', 'Auth\LoginController@redirectToFacebook')->name('login.facebook');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
 
+Route::get('login/google', 'Auth\LoginController@redirectToGoogle')->name('login.google');
+Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

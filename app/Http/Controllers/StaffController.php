@@ -135,7 +135,7 @@ class StaffController extends Controller
         }
        if($rec->save()){
 
-        notify()->info(" Status has been changed successfully!","Alert!");
+        notify()->info(" Status has been changed successfully!","Success!");
 
        }
 

@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Sale;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use RealRashid\SweetAlert\Facades\Alert;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
-use DB;
-use App\Http\Requests\SaleRequest;
-use Illuminate\Support\Facades\Input;
-use App\Product;
-use App\SaleTemp;
-use Illuminate\Support\Facades\Response;
-use \Auth, \Redirect, \Validator, \Session;
 
-class SaleApiController extends Controller
+class SaleReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,8 +14,10 @@ class SaleApiController extends Controller
      */
     public function index()
     {
+        $salesReport = Sale::orderBy('id','desc')->paginate('10');
+       //    dd($salesReport);
 
-        return Response::json(SaleTemp::with('product')->get());
+        return view('report.sale')->with('saleReport', $salesReport);
     }
 
     /**
@@ -45,16 +38,7 @@ class SaleApiController extends Controller
      */
     public function store(Request $request)
     {
-        $SaleTemps = new SaleTemp;
-        $SaleTemps->product_id = $request->product_id;
-        $SaleTemps->cost_price = $request->cost_price;
-        $SaleTemps->selling_price = $request->selling_price;
-        $SaleTemps->quantity = 1;
-        $SaleTemps->total_cost = $request->cost_price;
-        $SaleTemps->total_selling = $request->selling_price;
-        //dd($request->all());
-        $SaleTemps->save();
-        return $SaleTemps;
+        //
     }
 
     /**
@@ -88,12 +72,7 @@ class SaleApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $SaleTemps = SaleTemp::find($id);
-        $SaleTemps->quantity      = $request->quantity;
-        // $SaleTemps->total_cost    = $request->cost_price;
-        // $SaleTemps->total_selling = $request->selling_price;
-        $SaleTemps->save();
-        return $SaleTemps;
+        //
     }
 
     /**
@@ -104,6 +83,6 @@ class SaleApiController extends Controller
      */
     public function destroy($id)
     {
-        SaleTemp::destroy($id);
+        //
     }
 }

@@ -26,7 +26,9 @@ Chart.controllers.lineShadow = Chart.controllers.line.extend({
 	}
 });
 
+
 function monthlySalesChart() {
+	// $data = document.getElementById('#monthlySalesChart').innerHTML;
 	var options = {
 		chart : {
 			height : 300,
@@ -37,7 +39,7 @@ function monthlySalesChart() {
 				show : false,
 			}
 		},
-		colors:['#fab107', '#0775fa', '#9C27B0'],
+		colors:['#fab107', '#9C27B0'],
 		plotOptions : {
 			bar : {
 				horizontal : false,
@@ -53,15 +55,12 @@ function monthlySalesChart() {
 			width : 2,
 			colors : [ 'transparent' ]
 		},
-		series : [ {
-			name : 'Net Profit',
+		series : [{
+			name : 'Revenue',
 			data : [ 44, 55, 57, 56, 61, 58, 63, 60, 66, 53, 57, 61 ]
 		}, {
-			name : 'Revenue',
-			data : [ 76, 85, 99, 98, 87, 95, 91, 98, 94, 83, 93, 98 ]
-		}, {
 			name : 'Expense',
-			data : [ 35, 41, 34, 26, 45, 38, 52, 38, 41, 30, 36, 37 ]
+			data : [ 76, 85, 99, 98, 87, 95, 91, 98, 94, 83, 93, 98 ]
 		} ],
 		xaxis : {
 			categories : [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
