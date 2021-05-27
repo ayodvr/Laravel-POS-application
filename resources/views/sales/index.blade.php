@@ -10,6 +10,11 @@
               <div class="breadcrumb-item">Add Sales</div>
             </div>
           </div>
+          <?php
+          $user = Auth::user();
+          $role = $user['usertype'];
+          ?>
+   @if ($role == 'Admin' || $role == 'User')    
       <div class="section-body">
         <div class="row" ng-controller="SearchProductCtrl" ng-cloak>
             <div class="col-md-6">
@@ -28,7 +33,7 @@
                                   <div class="main-link box">
                                   <a href="#"><img class="img-responsive img-center" src="/storage/prod_image/@{{product.prod_image}}" alt=""
                                     ng-click="addSaleTemp(product, newsaletemp)" style="width: 91px;image-background:white;"></a>
-                                    <div class="text-center" style="margin-top: 5px"><p>@{{product.name}}</p></div>
+                                    <div class="text-center" style="margin-top: 5px"><p ng-cloak>@{{product.name}}</p></div>
                                   </div>
                                 </div>
                             </div>
@@ -42,7 +47,7 @@
                 <div class="card" style="height: 100%">
                     <div class="card-header">
                         <div>
-                            <input value="{{Auth::user()->usertype}}" class="btn btn-dark" 
+                            <input value="{{ $role }}" class="btn btn-dark" 
                             style="width: 100px;margin:5px;border-radius:5px;color:white"readonly>
                         </div>
                         <div style="margin-right:5px">
@@ -75,13 +80,13 @@
                         </thead>
                         <tbody>
                           <tr ng-repeat="newsaletemp in saletemp">
-                            <td>@{{newsaletemp.product_id}}</td>
-                            <td>@{{newsaletemp.product.name}}</td>
-                            <td>@{{newsaletemp.product.selling_price | currency}}</td>
-                            <td><input type="text" style="text-align:center;width:50px;" autocomplete="off" name="quantity" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.quantity" size="2"></td>
-                            <td>@{{newsaletemp.product.selling_price * newsaletemp.quantity | currency}}</td>
+                            <td ng-cloak>@{{newsaletemp.product_id}}</td>
+                            <td ng-cloak>@{{newsaletemp.product.name}}</td>
+                            <td ng-cloak>@{{newsaletemp.product.selling_price | currency}}</td>
+                            <td><input type="text" style="text-align:center;width:50px;" autocomplete="off" name="quantity" ng-change="updateSaleTemp(newsaletemp)" ng-cloak ng-model="newsaletemp.quantity" size="2"></td>
+                            <td ng-cloak>@{{newsaletemp.product.selling_price * newsaletemp.quantity | currency}}</td>
                             <td>
-                                <button class="btn btn-danger btn-xs" type="button" ng-click="removeSaleTemp(newsaletemp.id)">
+                                <button class="btn btn-danger btn-xs" type="button" ng-cloak ng-click="removeSaleTemp(newsaletemp.id)">
                                     <span class="fas fa-trash" aria-hidden="true"></span>
                                 </button>
                             </td>
@@ -92,7 +97,7 @@
                         <div class="col-sm-4">
                             <h6>Sub Total</h6>
                         </div>
-                           <div class="col-sm-8">
+                           <div class="col-sm-8" ng-cloak>
                                <p class="form-control-static subtotal"><b><input  style="width: 100px;height:20px;margin-left:200px;" 
                                  class="form-control" type="text" name="subtotal" value="@{{sum(saletemp)}}" readonly/></b>
                             </p>
@@ -127,7 +132,7 @@
                                     <input type="number" class="form-control" style="width: 100px;height:20px;"
                                     name="payment" id="add_payment" ng-model="add_payment" ng-init="add_payment =0" required/>
                                 </div>
-                                <div class="col-sm-4 text-right">
+                                <div class="col-sm-4 text-right" ng-cloak>
                                     <p class="form-control-static"><b>@{{ add_payment | currency}}</b></p>    
                                 </div>
                             </div>
@@ -160,6 +165,7 @@
                 </div>
             </div>
         </div>
+        @endif
       </div>
     </section>
   </div>

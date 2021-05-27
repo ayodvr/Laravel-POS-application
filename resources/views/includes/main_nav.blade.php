@@ -1,11 +1,15 @@
 <?php
-  $id = Auth::user()->id;
-  $admin_get = App\AdminProfile::where('user_id',$id)->first(); 
+  $user1      = Auth::user();
+  $id         = $user1['id'];
+  $usertype   = $user1['usertype'];
+  $admin_get  = App\AdminProfile::where('user_id',$id)->first(); 
 ?>
 
 <?php
-$id = Auth::user()->id;
-$staff_get = App\Staffs::where('user_id',$id)->first(); 
+      $user2      = Auth::user();
+      $id         = $user2['id'];
+      $usertype   = $user2['usertype'];
+      $staff_get  = App\Staffs::where('user_id',$id)->first(); 
 ?>
 
 <div class="navbar-bg"></div>
@@ -34,11 +38,11 @@ $staff_get = App\Staffs::where('user_id',$id)->first();
         <img alt="image" src="{{asset('assets/img/profile.png')}}" class="user-img-radious-style">
         <span class="d-sm-none d-lg-inline-block"></span></a>
       <div class="dropdown-menu dropdown-menu-right">
-        @if(Auth::user()->usertype == 'Admin')
-        <div class="dropdown-title">Howdy, {{ auth()->user()->usertype }}</div>
+        @if($usertype == 'Admin')
+        <div class="dropdown-title">Howdy, {{ $usertype }}</div>
         @endif
-        @if(Auth::user()->usertype == 'User')
-        <div class="dropdown-title">Howdy, {{ auth()->user()->usertype }}</div>
+        @if($usertype == 'User')
+        <div class="dropdown-title">Howdy, {{ $usertype }}</div>
         @endif
         <div class="dropdown-divider"></div>
         <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" 
@@ -52,7 +56,7 @@ $staff_get = App\Staffs::where('user_id',$id)->first();
     </li>
   </ul>
 </nav>
-@if(Auth::user()->usertype == 'Admin')
+@if($usertype == 'Admin')
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
@@ -162,7 +166,7 @@ $staff_get = App\Staffs::where('user_id',$id)->first();
   </div>
   @endif
   
-  @if(Auth::user()->usertype == 'User')
+  @if($usertype == 'User')
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
