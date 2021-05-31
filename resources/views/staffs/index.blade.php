@@ -37,8 +37,9 @@
                   <table class="table table-striped table-hover" id="save-stage" style="width:100%;">                   
                     <thead>
                       <tr>
+                        <td></td>
                         {{-- <th>Id</th> --}}
-                        <th>Photo</th>
+                        {{-- <th>Photo</th> --}}
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
@@ -53,10 +54,18 @@
                     <tbody>
                         @if(!empty($recs))
                         @foreach($recs as $rec)
-                      
+
+                        <?php
+                        $nameParts = explode(' ', trim($rec['name']));
+                        $firstName = array_shift($nameParts);
+                        $lastName = array_pop($nameParts);
+                        $initials[$rec['name']] = strtoupper((mb_substr($firstName,0,1) . mb_substr($lastName,0,1)));
+                        ?>
+                        
                       <tr>
+                        <td class="badges"><span class="badge badge-dark">{{$initials[$rec['name']]}}</span></td>
                         {{-- <td>{{$rec['user_id']}}</td> --}}
-                        <td><img src="/storage/photo/{{$rec['photo']}}" style ="width:100px" alt="" class="img-fluid"></td>
+                        {{-- <td><img src="/storage/photo/{{$rec['photo']}}" style ="width:100px" alt="" class="img-fluid"></td> --}}
                         <td>{{$rec['name']}}</td>
                         <td>{{$rec['email']}}</td>
                         <td>{{$rec['usertype']}}</td>
