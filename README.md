@@ -26,6 +26,7 @@ Stock Adding and Managing
 -- Accounts / Transactions
 -- Income and Expenses
 -- Invoicing 
+-- Paystack Payment Integration
 
 
 -- Run Composer install 
