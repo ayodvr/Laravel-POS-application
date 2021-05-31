@@ -45,9 +45,9 @@
     $('.select2').select2();
 </script> --}}
 <script>
-$(function() {
-   $('[data-toggle="tooltip"]').tooltip()
-})
+  $(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 </script>
 <script src="{{asset('assets/bundles/select2/dist/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/bundles/jquery-selectric/jquery.selectric.min.js')}}"></script>

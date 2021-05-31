@@ -32,7 +32,67 @@
   <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
           <i class="fas fa-expand"></i>
         </a>
-      </li>
+  </li>
+  <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+    class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+  <div class="dropdown-menu dropdown-list dropdown-menu-right">
+    <div class="dropdown-header">Notifications
+      {{-- <div class="float-right">
+        <a href="#">Mark All As Read</a>
+      </div> --}}
+    </div>
+    <div class="dropdown-list-content dropdown-list-icons">
+      <a href="#" class="dropdown-item dropdown-item-unread">
+        <span class="dropdown-item-icon bg-primary text-white">
+          <i class="fas fa-shopping-cart"></i>
+        </span>
+        <span class="dropdown-item-desc">
+          New Order
+          <span class="time">3 Hours Ago</span>
+        </span>
+      </a>
+      <a href="#" class="dropdown-item dropdown-item-unread">
+        <span class="dropdown-item-icon bg-info text-white">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+        </span>
+        <span class="dropdown-item-desc">
+          Application Error
+          <span class="time">7 Hours Ago</span>
+        </span>
+      </a>
+      <a href="#" class="dropdown-item">
+        <span class="dropdown-item-icon bg-success text-white">
+          <i class="fa fa-power-off" aria-hidden="true"></i>
+        </span>
+        <span class="dropdown-item-desc">
+          Server restarted
+          <span class="time">9 Hours Ago</span>
+        </span>
+      </a>
+      <a href="#" class="dropdown-item">
+        <span class="dropdown-item-icon bg-danger text-white">
+          <i class="fa fa-server" aria-hidden="true"></i>
+        </span>
+        <span class="dropdown-item-desc">
+          Your Subscription Expired
+          <span class="time">10 Hours Ago</span>
+        </span>
+      </a>
+      <a href="#" class="dropdown-item">
+        <span class="dropdown-item-icon bg-purple text-white">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </span>
+        <span class="dropdown-item-desc">
+          You have <b>4</b> new followers
+          <span class="time">Yesterday</span>
+        </span>
+      </a>
+    </div>
+    <div class="dropdown-footer text-center">
+      <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+    </div>
+  </div>
+</li>
     <li class="dropdown"><a href="#" data-toggle="dropdown"
         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
         <img alt="image" src="{{asset('assets/img/profile.png')}}" class="user-img-radious-style">
@@ -94,12 +154,12 @@
                 <li><a class="nav-link" href="{{route('customers.create')}}">Add Customers</a></li>
               </ul>
             </li>
-            <li class="dropdown">
+            {{-- <li class="dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-credit-card"></i><span>Purchase</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{route('receiving.index')}}">Add Purchase</a></li>
               </ul>
-              </li>
+            </li> --}}
           <li class="dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-cart-arrow-down"></i><span>Sales</span></a>
           <ul class="dropdown-menu">

@@ -70,7 +70,7 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th scope="col">Id</th>
+                            {{-- <th scope="col">Id</th> --}}
                             <th scope="col">Product</th>
                             <th scope="col">Price</th>
                             <th scope="col">Quantity</th>
@@ -80,7 +80,7 @@
                         </thead>
                         <tbody>
                           <tr ng-repeat="newsaletemp in saletemp">
-                            <td ng-cloak>@{{newsaletemp.product_id}}</td>
+                            {{-- <td ng-cloak>@{{newsaletemp.product_id}}</td> --}}
                             <td ng-cloak>@{{newsaletemp.product.name}}</td>
                             <td ng-cloak>@{{newsaletemp.product.selling_price | currency}}</td>
                             <td><input type="text" style="text-align:center;width:50px;" autocomplete="off" name="quantity" ng-change="updateSaleTemp(newsaletemp)" ng-cloak ng-model="newsaletemp.quantity" size="2"></td>
@@ -156,7 +156,7 @@
                                     </div>  
                                     
                                 </div> --}}
-                            <div class="text-center">
+                            <div class="text-center mt-5">
                                 <button class="btn btn-lg btn-success" type="submit" style="width:90%;margin:15px">Make Payment</button>
                             </div>
                       </div>

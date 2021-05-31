@@ -198,4 +198,18 @@ class ProductsController extends Controller
 
         return redirect()->back();
     }
+
+
+    public function dmp(Request $request){
+
+        $id = $request->id;
+       
+        foreach ($id as $user){
+
+            Product::where('id', $user)->delete();
+        }
+        notify()->success("Product Deleted!","Success");
+
+        return redirect()->back();
+    }
 }

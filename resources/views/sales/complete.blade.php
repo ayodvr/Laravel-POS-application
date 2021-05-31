@@ -158,11 +158,6 @@
           </div>
         </div>
       </div>
-      <?php
-        $convert = $sales->grand_total;
-        $price = ($convert ?? 5000) * 100;
-        //dd($price);
-      ?>
     </section>
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -177,7 +172,7 @@
                 <input type="hidden" name="firstname" value="{{ $sales->customer->name }}"> {{-- required --}}
                 <input type="hidden" name="email" value="{{ $sales->customer->email }}"> {{-- required --}}
                 <input type="hidden" name="orderID" value="{{ $saleItemsData->sale_id }}">
-                <input type="hidden" name="amount" value="{{ $price }}"> {{-- required in kobo --}}
+                <input type="hidden" name="amount" value="{{ $sales->grand_total * 100 }}"> {{-- required in kobo --}}
                 <input type="hidden" name="quantity" value="{{ $value->quantity }}">
                 <input type="hidden" name="currency" value="NGN">
                 <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}

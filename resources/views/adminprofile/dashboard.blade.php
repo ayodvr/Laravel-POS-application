@@ -26,10 +26,10 @@
                     <div class="col">
                     <div class="font-weight-bold">Products</div>
                     <div class="progress" data-height="5">
-                      <div class="progress-bar l-bg-green" role="progressbar" data-width="20%" aria-valuenow="80"
+                      <div class="progress-bar l-bg-green" role="progressbar" data-width="100%" aria-valuenow="80"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <div class="text-small float-right font-weight-bold text-muted">{{$items}} Items</div>
+                    <div class="text-small float-right font-weight-bold text-muted"><b>{{$items}} Items</b></div>
                     </div>
                   </div>
                   <div class="row pt-3 pb-3">
@@ -41,10 +41,10 @@
                     <div class="col">
                     <div class="font-weight-bold">Staffs</div>
                     <div class="progress" data-height="5">
-                      <div class="progress-bar l-bg-cyan" role="progressbar" data-width="15%" aria-valuenow="25"
+                      <div class="progress-bar l-bg-cyan" role="progressbar" data-width="100%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <div class="text-small float-right font-weight-bold text-muted">{{$staff}} Staffs</div>
+                    <div class="text-small float-right font-weight-bold text-muted"><b>{{$staff}} Staffs</b></div>
                     </div>
                   </div>
                   <div class="row pt-3 pb-3">
@@ -57,10 +57,10 @@
                     <div class="col">
                     <div class="font-weight-bold">Customers</div>
                     <div class="progress" data-height="5">
-                      <div class="progress-bar l-bg-orange" role="progressbar" data-width="30%" aria-valuenow="25"
+                      <div class="progress-bar l-bg-orange" role="progressbar" data-width="100%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <div class="text-small float-right font-weight-bold text-muted">{{$customers}} Customers</div>
+                    <div class="text-small float-right font-weight-bold text-muted"><b>{{$customers}} Customers</b></div>
                     </div>
                   </div>
                   <div class="row pt-3 pb-3">
@@ -72,10 +72,10 @@
                     <div class="col">
                     <div class="font-weight-bold">Sales</div>
                     <div class="progress" data-height="5">
-                      <div class="progress-bar l-bg-purple" role="progressbar" data-width="58%" aria-valuenow="25"
+                      <div class="progress-bar l-bg-purple" role="progressbar" data-width="100%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <div class="text-small float-right font-weight-bold text-muted">&#x20A6; {{$sales}}</div>
+                    <div class="text-small float-right font-weight-bold text-muted"><b>&#x20A6;@money($sales)</b></div>
                     </div>
                   </div>
                 </div>
@@ -92,18 +92,8 @@
               </div>
             </div>
            </div>
-           {{-- <div class="row">
-            <div class="col-lg-6 col-md-12 col-12 col-sm-12">
-              <div class="card">
-                <div class="card-header">
-                  <h4>Yearly Sales</h4>
-                </div>
-                <div class="card-body">
-                  <div id="yearlySalesChart"></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+           <div class="row">
+            <div class="col-lg-8 col-md-12 col-12 col-sm-12">
               <div class="card">
                 <div class="card-header">
                   <h4>Latest Transcation</h4>
@@ -199,7 +189,34 @@
                 </div>
               </div>
             </div>
-          </div> --}}
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>User Activity</h4>
+                  </div>
+                  <div class="card-body">
+						      <div class="timeline-activity">
+                            <div class="activity-item1">
+                                    <div class="text-muted">01-03-2020</div>
+                                    <p>Lorem ipsum dolor sit amet conse ctetur which ascing elit users.</p>
+                            </div>
+                            <div class="activity-item2">
+                                    <div class="text-muted">15-03-2020</div>
+                                    <p>Lorem ipsum dolor sit ametcon the sectetur that ascing elit users.</p>
+                            </div>
+                            <div class="activity-item3">
+                                    <div class="text-muted">11-04-2020</div>
+                                    <p>Lorem ipsum dolor sit amet consec tetur adip ascing elit users.</p>
+                            </div>
+                            <div class="activity-item4">
+                                    <div class="text-muted">21-04-2020</div>
+                                    <p>Lorem ipsum dolor sit amet conse ctetur which ascing elit users.</p>
+                            </div>
+                        </div>
+                        </div>
+                  </div>
+                </div>
+          </div>
         </section>
 	  </div>
 @endsection

@@ -56,6 +56,7 @@ Route ::group(['middleware'=>'auth'],function(){
 Route::resource('/sales',"SalesController");
 Route::resource('/receiving',"ReceivingController");
 Route::resource('/products',"ProductsController");
+Route::delete('/delete-products', "ProductsController@dmp")->name('products.dmp');
 Route::resource('/customers',"CustomersController");
 Route::resource('/suppliers',"SuppliersController");
 Route::resource('/categories',"CategoryController");
@@ -78,4 +79,6 @@ Route::get('login/google', 'Auth\LoginController@redirectToGoogle')->name('login
 Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 
