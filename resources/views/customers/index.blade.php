@@ -29,8 +29,8 @@
                   <table class="table table-striped table-hover" id="save-stage" style="width:100%;">                   
                     <thead>
                       <tr>
-                        <th>Id</th>
-                        <th>Avatar</th>
+                        <th></th>
+                        {{-- <th>Avatar</th> --}}
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -41,9 +41,16 @@
                     <tbody>
                         @if(!empty($customers))
                         @foreach($customers as $customer)
+
+                        <?php
+                          $nameparts = explode(' ', trim($customer->name));
+                          $firstname = array_shift($nameparts);
+                          $lastname  = array_pop($nameparts);
+                          $initials[$customer->name] = strtoupper((mb_substr($firstname,0,1) . mb_substr($lastname,0,1)));
+                        ?>
                       <tr>
-                        <td>{{$customer->id}}</td>
-                        <td><img src="/storage/avatar/{{$customer->avatar}}" style ="width:100px" alt="" class="img-fluid"></td>
+                        <td class="badges"><span class="badge badge-dark">{{$initials[$customer->name]}}</span></td>
+                        {{-- <td><img src="/storage/avatar/{{$customer->avatar}}" style ="width:100px" alt="" class="img-fluid"></td> --}}
                         <td>{{$customer->name}}</td>
                         <td>{{$customer->email}}</td>
                         <td>{{$customer->phone_number}}</td>

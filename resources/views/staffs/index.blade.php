@@ -37,9 +37,9 @@
                   <table class="table table-striped table-hover" id="save-stage" style="width:100%;">                   
                     <thead>
                       <tr>
-                        <td></td>
+                        {{-- <td></td> --}}
                         {{-- <th>Id</th> --}}
-                        {{-- <th>Photo</th> --}}
+                        <th></th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
@@ -63,9 +63,9 @@
                         ?>
                         
                       <tr>
-                        <td class="badges"><span class="badge badge-dark">{{$initials[$rec['name']]}}</span></td>
                         {{-- <td>{{$rec['user_id']}}</td> --}}
                         {{-- <td><img src="/storage/photo/{{$rec['photo']}}" style ="width:100px" alt="" class="img-fluid"></td> --}}
+                        <td class="badges"><span class="badge badge-dark">{{$initials[$rec['name']]}}</span></td> 
                         <td>{{$rec['name']}}</td>
                         <td>{{$rec['email']}}</td>
                         <td>{{$rec['usertype']}}</td>
