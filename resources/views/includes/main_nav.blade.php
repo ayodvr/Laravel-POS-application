@@ -2,14 +2,14 @@
   $user1      = Auth::user();
   $id         = $user1['id'];
   $usertype   = $user1['usertype'];
-  $admin_get  = App\AdminProfile::where('user_id',$id)->first(); 
+  $admin_get  = App\AdminProfile::where('user_id',$id)->first();
 ?>
 
 <?php
       $user2      = Auth::user();
       $id         = $user2['id'];
       $usertype   = $user2['usertype'];
-      $staff_get  = App\Staffs::where('user_id',$id)->first(); 
+      $staff_get  = App\Staffs::where('user_id',$id)->first();
 ?>
 
 <div class="navbar-bg"></div>
@@ -19,12 +19,12 @@
       <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg collapse-btn"><i
             class="fas fa-bars"></i></a></li>
       <li>
-      <div class="search-group">
+      {{-- <div class="search-group">
         <span class="nav-link nav-link-lg" id="search">
             <i class="fa fa-search" aria-hidden="true"></i>
         </span>
         <input type="text" class="search-control" placeholder="search" aria-label="search" aria-describedby="search">
-      </div>
+      </div> --}}
       </li>
     </ul>
   </div>
@@ -95,17 +95,34 @@
 </li>
     <li class="dropdown"><a href="#" data-toggle="dropdown"
         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-        <img alt="image" src="{{asset('assets/img/profile.png')}}" class="user-img-radious-style">
+        @if ($usertype == 'Admin')
+          <img alt="image" src="/storage/admin_image/{{$admin_get['admin_image']}}" class="user-img-radious-style">
         <span class="d-sm-none d-lg-inline-block"></span></a>
+        @else
+        <img alt="image" src="/storage/photo/{{$staff_get['photo']}}" class="user-img-radious-style">
+        <span class="d-sm-none d-lg-inline-block"></span></a>
+        @endif
       <div class="dropdown-menu dropdown-menu-right">
         @if($usertype == 'Admin')
-        <div class="dropdown-title">Howdy, {{ $usertype }}</div>
+        <div class="dropdown-title">Hello, {{ $usertype }}</div>
         @endif
         @if($usertype == 'User')
-        <div class="dropdown-title">Howdy, {{ $usertype }}</div>
+        <div class="dropdown-title">Hello, {{ $usertype }}</div>
         @endif
+        @if($usertype == 'Admin' && !empty($admin_get))
+           <a href="/adminprofile/{{$admin_get->id}}" class="dropdown-item has-icon">
+          <i class="far fa-user"></i> Profile
+        </a>
+        @elseif($usertype == 'User' && !empty($staff_get))
+        <a href="/staffs/{{$staff_get->id}}" class="dropdown-item has-icon">
+          <i class="far fa-user"></i> Profile
+        </a>
+        @endif
+        <a href="#" class="dropdown-item has-icon">
+          <i class="fas fa-cog"></i> Settings
+        </a>
         <div class="dropdown-divider"></div>
-        <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" 
+        <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger"
         onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}
         <i class="fas fa-sign-out-alt"></i>
       </a>
@@ -194,10 +211,10 @@
                 @if(empty($admin_get))
                 <li><a class="nav-link" href="/adminprofile/create">Complete Profile</a></li>
                 @endif
-                @if(!empty($admin_get)) 
+                @if(!empty($admin_get))
                 <li><a class="nav-link" href="/adminprofile/{{$admin_get->id}}/edit">Update</a></li>
                 @endif
-                @if(!empty($admin_get)) 
+                @if(!empty($admin_get))
                 <li><a class="nav-link" href="/adminprofile/{{$admin_get->id}}">View</a></li>
                 @endif
             </ul>
@@ -206,7 +223,7 @@
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check-alt"></i><span>Report</span></a>
             <ul class="dropdown-menu">
             <li><a class="nav-link" href="{{route('salesreport.index')}}">Sales Report</a></li>
-            <li><a class="nav-link" href="{{route('receivingsreport.index')}}">Purchase Report</a></li>
+            {{-- <li><a class="nav-link" href="{{route('receivingsreport.index')}}">Purchase Report</a></li> --}}
             </ul>
           </li>
           {{-- <li class="dropdown">
@@ -225,7 +242,7 @@
     </aside>
   </div>
   @endif
-  
+
   @if($usertype == 'User')
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">

@@ -10,88 +10,55 @@
             <h1 style="font-family: Arial, Helvetica, sans-serif">Welcome, {{ Auth::user()->usertype }}</h1>
           </div>
           <div class="row">
-          	<div class="col-md-4">
-              <div class="card">
-              <div class="card-header">
-                  <h4>Monthly Budget Summary</h4>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card card-primary">
+                <div class="pricing">
+                  <div class="pricing-price bg-purple">
+                    <br>
+                    <i class="fas fa-cart-arrow-down" style="width: 200px"></i>
+                    <div class="package-name">Total Sales</div>
+                  <div class="package-price"><b>&#x20A6;{{ number_format($sales)}}</b></div>
+                   </div>
+                </div> 
                 </div>
-                
-                <div class="card-body card-type-4">
-                  <div class="row pt-3 pb-3">
-                    <div class="col-auto">
-                      <div class="card-square l-bg-green text-white">
-                        <i class="fas fa-align-justify"></i>
-                      </div>
-                    </div>
-                    <div class="col">
-                    <div class="font-weight-bold">Products</div>
-                    <div class="progress" data-height="5">
-                      <div class="progress-bar l-bg-green" role="progressbar" data-width="100%" aria-valuenow="80"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="text-small float-right font-weight-bold text-muted"><b>{{$items}} Items</b></div>
-                    </div>
-                  </div>
-                  <div class="row pt-3 pb-3">
-                    <div class="col-auto">
-                      <div class="card-square l-bg-cyan text-white">
-                        <i class="fas fa-users"></i>
-                      </div>
-                    </div>
-                    <div class="col">
-                    <div class="font-weight-bold">Staffs</div>
-                    <div class="progress" data-height="5">
-                      <div class="progress-bar l-bg-cyan" role="progressbar" data-width="100%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="text-small float-right font-weight-bold text-muted"><b>{{$staff}} Staffs</b></div>
-                    </div>
-                  </div>
-                  <div class="row pt-3 pb-3">
-                    <div class="col-auto">
-                      <div class="card-square l-bg-orange text-white">
-                      
-                        <i class="fas fa-users"></i>
-                      </div>
-                    </div>
-                    <div class="col">
-                    <div class="font-weight-bold">Customers</div>
-                    <div class="progress" data-height="5">
-                      <div class="progress-bar l-bg-orange" role="progressbar" data-width="100%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="text-small float-right font-weight-bold text-muted"><b>{{$customers}} Customers</b></div>
-                    </div>
-                  </div>
-                  <div class="row pt-3 pb-3">
-                    <div class="col-auto">
-                      <div class="card-square l-bg-purple text-white">
-                        <i class="fas fa-shopping-cart"></i>
-                      </div>
-                    </div>
-                    <div class="col">
-                    <div class="font-weight-bold">Sales</div>
-                    <div class="progress" data-height="5">
-                      <div class="progress-bar l-bg-purple" role="progressbar" data-width="100%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="text-small float-right font-weight-bold text-muted"><b>&#x20A6;@money($sales)</b></div>
-                    </div>
-                  </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card card-secondary">
+                <div class="pricing">
+                  <div class="pricing-price bg-teal">
+                    <br>
+                    <i class="fas fa-align-justify"></i>
+                    <div class="package-name">Products</div>
+                  <div class="package-price"><b>{{$items}}</b></div>
+                   </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card card-danger">
+                <div class="pricing">
+                  <div class="pricing-price bg-dark-pink">
+                    <br>
+                    <i class="fas fa-users"></i>
+                    <div class="package-name">Staffs</div>
+                  <div class="package-price"><b>{{$staff}}</b></div>
+                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-8 col-md-12 col-12 col-sm-12">
-              <div class="card">
-                <div class="card-header">
-                  <h4>Monthly Sales</h4>
-                </div>
-                <div class="card-body">
-                 	<div id="monthlySalesChart"></div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card card-warning">
+                <div class="pricing">
+                  <div class="pricing-price bg-purple">
+                    <br>
+                    <i class="fas fa-users"></i>
+                    <div class="package-name">Customers</div>
+                  <div class="package-price"><b>{{$customers}}</b></div>
+                   </div>
                 </div>
               </div>
             </div>
-           </div>
+          </div>
            <div class="row">
             <div class="col-lg-8 col-md-12 col-12 col-sm-12">
               <div class="card">
@@ -107,83 +74,28 @@
                         <th>Total</th>
                         <th>Due Date</th>
                         <th>Payment Status</th>
-                        <th>Action</th>
+                        {{-- <th>Action</th> --}}
                       </tr>
-                      <tr>
-                        <td>#TD1230</td>
-                        <td>John Mitchell</td>
-                        <td>150$</td>
-                        <td>2020-01-20</td>
+                      @foreach($latest as $sales)
+                        <tr>
+                        <td>{{$sales->uuid}}</td>
+                        <td>{{$sales->customer->name}}</td>
+                        <td><span> &#x20A6;</span>@money($sales->grand_total)</td>
+                        <td>{{$sales['created_at']->toDayDateTimeString()}}</td>
                         <td>
+                            @if($sales->status == 1)
                             <div class="badge badge-success badge-shadow">Paid</div>
+                            @else
+                            <div class="badge badge-danger badge-shadow">Unpaid</div>
+                            @endif
                         </td>
-                        <td>
+                        {{-- <td>
                           <div class="media-cta-square">
                         	<a href="#" class="btn btn-outline-primary">Detail</a>
                       	</div>
-                        
-                        </td>
+                        </td> --}}
                       </tr>
-                      <tr>
-                        <td>#TD1231</td>
-                        <td>Henry Smith</td>
-                        <td>250$</td>
-                        <td>2020-01-08</td>
-                        <td>
-                            <div class="badge badge-info badge-shadow">Refund</div>
-                        </td>
-                        <td>
-                          <div class="media-cta-square">
-                        	<a href="#" class="btn btn-outline-primary">Detail</a>
-                      	</div>
-                        
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>#TD1232</td>
-                        <td>Barry Hick</td>
-                        <td>350$</td>
-                        <td>2019-12-29</td>
-                        <td>
-                            <div class="badge badge-success badge-shadow">Paid</div>
-                        </td>
-                        <td>
-                          <div class="media-cta-square">
-                        	<a href="#" class="btn btn-outline-primary">Detail</a>
-                      	</div>
-                        
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>#TD1233</td>
-                        <td>Ronald Taylor</td>
-                        <td>435$</td>
-                        <td>2020-02-02</td>
-                        <td>
-                            <div class="badge badge-danger badge-shadow">Chargeback</div>
-                        </td>
-                        <td>
-                          <div class="media-cta-square">
-                        	<a href="#" class="btn btn-outline-primary">Detail</a>
-                      	</div>
-                        
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#TD1234</td>
-                        <td>Ava Johnson</td>
-                        <td>220$</td>
-                        <td>2020-02-27</td>
-                        <td>
-                            <div class="badge badge-info badge-shadow">Refund</div>
-                        </td>
-                        <td>
-                          <div class="media-cta-square">
-                        	<a href="#" class="btn btn-outline-primary">Detail</a>
-                      	</div>
-                        
-                        </td>
-                      </tr>
+                      @endforeach
                     </table>
                   </div>
                 </div>

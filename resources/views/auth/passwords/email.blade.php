@@ -19,7 +19,7 @@
                         </div>
                     @endif
                 <p class="text-muted">We will send a link to reset your password</p>
-                <form method="POST" action="{{ route('password.email') }}">
+                <form method="POST" action="{{ route('forget.password.post') }}">
                     @csrf
                   <div class="form-group">
                     <label for="email">{{ __('E-Mail Address') }}</label>

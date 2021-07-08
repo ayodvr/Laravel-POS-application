@@ -58,7 +58,6 @@ class SalesController extends Controller
         'payment_type'=>'required',
         'subtotal'=>'required',
         'payment'=>'required'
-
         ]);
 
         $saleItems = SaleTemp::all();
@@ -75,6 +74,7 @@ class SalesController extends Controller
         $discount = $request->discount;
         $discount_percent = $request->discount_percent;
         $subtotal = $request->subtotal;
+        $sales->uuid = $this->realUniqId();
         
 
         $total_discount = $discount + ($discount_percent * $subtotal)/100;
@@ -108,13 +108,14 @@ class SalesController extends Controller
         foreach ($saleItems as $value) {
             $saleItemsData = new SaleItem;
             $saleItemsData->sale_id = $sales->id;
+            $saleItemsData->uuid = $sales->uuid;
             $saleItemsData->product_id = $value->product_id;
             $saleItemsData->cost_price = $value->cost_price;
             $saleItemsData->selling_price = $value->selling_price;
             $saleItemsData->quantity = $value->quantity;
             $saleItemsData->total_cost = $value->total_cost;
             $saleItemsData->total_selling = $value->total_selling;
-            $saleItemsData->save();
+            $saleItemsData->save(); 
             //process inventory
             $products = Product::find($value->product_id);
             if ($products->type == 1) {
@@ -139,6 +140,18 @@ class SalesController extends Controller
                  ->with('saleItemsData', $saleItemsData)
                  ->with('saleItems', $itemssale);
     }
+
+    public function realUniqId($lenght = 10) {
+        // uniqid gives 13 chars, but you could adjust it to your needs.
+        if (function_exists("random_bytes")) {
+            $bytes = random_bytes(ceil($lenght / 2));
+        } elseif (function_exists("openssl_random_pseudo_bytes")) {
+            $bytes = openssl_random_pseudo_bytes(ceil($lenght / 2));
+        } else {
+            throw new Exception("no cryptographically secure random function available");
+        }
+        return substr(bin2hex($bytes), 0, $lenght);
+  }
 
     /**
      * Display the specified resource.

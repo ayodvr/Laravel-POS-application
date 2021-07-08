@@ -19,7 +19,7 @@ class SuppliersTableSeeder extends Seeder
 	            'name' => $faker->name,
                 'email' => $faker->email,
                 'phone' => $faker->e164PhoneNumber,
-                'sup_img' => $faker->image('public/storage/sup_img',640,480, null, false),
+                'sup_img' => $faker->imageUrl($width = 640, $height = 480),
                 'address' => $faker->address,
                 'company_name' => $faker->company,
                 'city' => $faker->city,

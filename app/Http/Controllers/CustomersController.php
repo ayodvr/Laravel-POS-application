@@ -24,31 +24,31 @@ class CustomersController extends Controller
         
     }
 
-    // public function Customer_PDF()
-    // {
-    //     $customer_pdf = Customers::orderBy('id','desc')->get();
+    public function Customer_PDF()
+    {
+        $customer_pdf = Customers::orderBy('id','desc')->get();
       
-    //     $filename = 'Customers_list.pdf';
-    //     $mpdf = new \Mpdf\Mpdf([
-    //         'margin-left' => 10,
-    //         'margin-left' => 10,
-    //         'margin-left' => 15,
-    //         'margin-left' => 20,
-    //         'margin-left' => 10,
-    //         'margin-left' => 10
-    //     ]);
+        $filename = 'Customers_list.pdf';
+        $mpdf = new \Mpdf\Mpdf([
+            'margin-left' => 10,
+            'margin-left' => 10,
+            'margin-left' => 15,
+            'margin-left' => 20,
+            'margin-left' => 10,
+            'margin-left' => 10
+        ]);
 
-    //     $html = \View::make('customers.customerPDF')->with('customer_pdf',$customer_pdf);
-    //     $html = $html->render();
+        $html = \View::make('customers.customerPDF')->with('customer_pdf',$customer_pdf);
+        $html = $html->render();
 
-    //     $mpdf->setHeader('xxxx|Customers|{PAGENO}');
-    //     $mpdf->setFooter('Copyright StockBase Inc');
-    //     $stylesheet = file_get_contents(url('css/customer_pdf.css'));
-    //     $mpdf->WriteHTML($stylesheet,1);
-    //     $mpdf->WriteHTML($html);
-    //     $mpdf->Output($filename,'I');
+        $mpdf->setHeader('xxxx|Customers|{PAGENO}');
+        $mpdf->setFooter('Copyright StockBase Inc');
+        $stylesheet = file_get_contents(url('css/customer_pdf.css'));
+        $mpdf->WriteHTML($stylesheet,1);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($filename,'I');
         
-    // }
+    }
 
     /**
      * Show the form for creating a new resource.

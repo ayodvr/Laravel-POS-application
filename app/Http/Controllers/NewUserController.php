@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
+use App\Mail\UserMail;
+use Mail;
+use Illuminate\Support\Str;
+use Crypt;
 
 class NewUserController extends Controller
 {
@@ -17,22 +21,34 @@ class NewUserController extends Controller
 
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'usertype' => ['required', 'string', 'max:255'],
+            // 'usertype' => ['string', 'max:255']
 
         ]);
 
-            $user = new User;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->usertype = $request->usertype;
+        $password = Str::random(6);
 
-            if($user->save()){
-                
+        $data = [
+            'name'=> $request->get('name'),
+            'email'=> $request->get('email'),
+            'password'=> Hash::make($password),
+            'usertype'=> $request->get('usertype')
+        ];
+
+            if(User::create($data)){
+
+                $email = $data['email'];
+                $details = [
+                    'name' => $data['name'],
+                    'email'=> $data['email'],
+                    'password' => $password
+                ];
+
+                //dd($details['password']);
+                Mail::to($email)->send(new UserMail($details));
+
                 return response()->json(['success_info'=>'<h6>You have succesfully registered a new user!</h6>']);
 
             }
-            
+
     }
 }

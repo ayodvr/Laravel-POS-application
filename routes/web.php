@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- 
+
 // Route::get('/calendar',function (){
 // return view('calendar');
 // });
@@ -33,7 +33,7 @@ Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
 
 Route ::group(['middleware'=>'auth'],function(){
-    Route::get('changeStatus/{id}','StaffController@changeStatus')->name('changeStatus'); 
+    Route::get('changeStatus/{id}','StaffController@changeStatus')->name('changeStatus');
     Route::get('/staff_dashboard', 'StaffController@staff_dashboard')->name('staffs.staff_dashboard');
     Route::get('/staffs/trashed', 'StaffController@trashed')->name('staffs.trashed');
     Route::get('/staffs/kill/{id}', 'StaffController@kill')->name('staffs.kill');
@@ -51,7 +51,7 @@ Route ::group(['middleware'=>'auth'],function(){
     Route::post('/adminprofile/{id}/update',"AdminProfileController@update")->name('update');
     Route::get('/adminprofile/{id}/destroy',"AdminProfileController@destroy")->name('destroy');
     Route::get('/register_2',"NewUserController@create")->name('register_2');
-    Route::post('/store',"NewUserController@user_store")->name('user_store');     
+    Route::post('/store',"NewUserController@user_store")->name('user_store');
 });
 Route::resource('/sales',"SalesController");
 Route::resource('/receiving',"ReceivingController");
@@ -66,6 +66,7 @@ Route::resource('/transactions',"TransactionsController");
 Route::resource('/expense',"ExpenseController");
 Route::resource('/expense_cat',"ExpenseCategoryController");
 Route::get('/pdf',"CustomersController@Customer_PDF")->name('customer_pdf');
+Route::get('/sales-rep-pdf',"SaleReportController@Sale_PDF")->name('sale_pdf');
 Route::resource('api/saletemp','SaleApiController');
 Route::resource('api/receivingtemp','ReceivingApiController');
 Route::resource('api/prodtemp','ProductsApiController');
@@ -80,5 +81,11 @@ Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback')
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('forget-password', 'ForgotPasswordController@showForgetPasswordForm')->name('forget.password.get');
+Route::post('forget-password', 'ForgotPasswordController@submitForgetPasswordForm')->name('forget.password.post');
+Route::get('reset-password/{token}', 'ForgotPasswordController@showResetPasswordForm')->name('reset.password.get');
+Route::post('reset-password', 'ForgotPasswordController@submitResetPasswordForm')->name('reset.password.post');
+
+Route::get('login-details','NewUserController@user_store');
 
 

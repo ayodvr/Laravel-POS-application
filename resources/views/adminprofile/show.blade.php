@@ -9,7 +9,7 @@
       <div class="section-header">
         <h1>Profile</h1>
         <div class="section-header-breadcrumb">
-          <div class="breadcrumb-item active"><a href="/dashboard">Dashboard</a></div>  
+          <div class="breadcrumb-item active"><a href="/dashboard">Dashboard</a></div>
           <div class="breadcrumb-item">Profile</div>
         </div>
       </div>
@@ -23,7 +23,7 @@
                       <div class="page-inner box-center align-center">
                       <h2><a>{{auth()->user()->name}}</a></h2>
                       </div>
-                  </div>         			
+                  </div>
               </div>
           </div>
         <div class="row mt-sm-4">
@@ -39,7 +39,7 @@
                       Full Name
                     </span>
                     <span class="float-right text-muted">
-                    {{$admin->user_name}}   
+                    {{$admin->user_name}}
                     </span>
                   </p>
                   <p class="clearfix">

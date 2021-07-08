@@ -25,7 +25,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table table-striped table-hover" id="save-stage" style="width:100%;">                   
+                  <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
                     <thead>
                       <tr>
                         <th>Id</th>
@@ -35,14 +35,14 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Address</th>
-                        <th>Action</th>     
+                        <th>Action</th>
                       </tr>
                     </thead>
-                    
+
                     <tbody>
                         @if(!empty($suppliers))
                         @foreach($suppliers as $supplier)
-                      
+
                       <tr>
                         <td>{{$supplier->id}}</td>
                         <td><img src="/storage/sup_img/{{$supplier->sup_img}}" style ="width:100px" alt="" class="img-fluid"></td>
@@ -63,11 +63,11 @@
                                     <form action="{{ route('suppliers.destroy' , $supplier->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
-                                        <button class="btn-sm btn btn-outline-danger pull-right delete-confirm" 
+                                        <button class="btn-sm btn btn-outline-danger pull-right delete-confirm"
                                         data-name ="{{ $supplier->name }}" type="submit" style="margin-top: 5px">Trash</button>
                                     </form>
                             </div>
-                        </div> 
+                        </div>
                         </td>
                       </tr>
                       @endforeach
@@ -85,3 +85,4 @@
   </div>
 
   @endsection
+

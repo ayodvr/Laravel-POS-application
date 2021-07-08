@@ -93,7 +93,7 @@
                     </tr>
                     @foreach($saleItems as $value)
                     <tr>
-                      <td>{{$value->product->name}}</td>
+                      <td>{{$value->product['name']}}</td>
                       <td class="text-center">{{$value->quantity}}</td>
                       <td class="text-center"><span> &#x20A6;</span>@money($value->selling_price)</td>
                       {{-- <td class="text-right"><span> &#x20A6;</span>@money($value->total_selling)</td> --}}
@@ -148,10 +148,10 @@
             </div><hr>
             <div class="row mt-4">
                 <div class="text-md-right">
-                    <div class="float-lg-left">
+                    <div class="float-lg-right">
                     <button  class="btn btn-success btn-icon icon-right" data-toggle="modal" data-target="#exampleModalCenter"
                       ><i class="fas fa-credit-card"></i>Pay</button>
-                      <button class="btn btn-light btn-icon icon-left"><i class="fas fa-print"></i>Print invoice</button>
+                      {{-- <button class="btn btn-light btn-icon icon-left"><i class="fas fa-print"></i>Print invoice</button> --}}
                     </div>
                 </div>
             </div>
@@ -159,6 +159,11 @@
         </div>
       </div>
     </section>
+    <?php 
+      $nameparts = explode(' ',trim($sales->customer->name));
+      $firstname = array_shift($nameparts);
+      $lastname  = array_pop($nameparts);
+    ?>
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -169,9 +174,10 @@
           </div>
           <div class="modal-body">
             <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
-                <input type="hidden" name="firstname" value="{{ $sales->customer->name }}"> {{-- required --}}
+                <input type="hidden" name="first_name" value="{{ $firstname }}"> {{-- required --}}
+                <input type="hidden" name="last_name" value="{{ $lastname }}"> {{-- required --}}
                 <input type="hidden" name="email" value="{{ $sales->customer->email }}"> {{-- required --}}
-                <input type="hidden" name="orderID" value="{{ $saleItemsData->sale_id }}">
+                <input type="hidden" name="order_id" value="{{ $value->uuid }}">
                 <input type="hidden" name="amount" value="{{ $sales->grand_total * 100 }}"> {{-- required in kobo --}}
                 <input type="hidden" name="quantity" value="{{ $value->quantity }}">
                 <input type="hidden" name="currency" value="NGN">

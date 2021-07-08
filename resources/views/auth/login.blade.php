@@ -29,7 +29,7 @@
                         @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}" class="text-small">
                         {{ __('Forgot Your Password?') }}
-                        </a>   
+                        </a>
                         @endif
                       </div>
                     </div>
@@ -82,9 +82,9 @@
     function EnableDisable(txtPassportNumber) {
         //Reference the Button.
         var btnSubmit = document.getElementById("btnSubmit");
- 
+
         //Verify the TextBox value.
-        if (txtPassportNumber.value.length > 6 ) {
+        if (txtPassportNumber.value.length > 5 ) {
             //Enable the TextBox when TextBox has value.
             btnSubmit.disabled = false;
         } else {
@@ -94,4 +94,3 @@
     };
 </script>
 @endsection
-  

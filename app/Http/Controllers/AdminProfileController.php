@@ -12,6 +12,7 @@ use App\Customers;
 use App\Product;
 use App\Supplier;
 use App\Sale;
+use App\SaleItem;
 use DB;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -36,48 +37,51 @@ class AdminProfileController extends Controller
             $items = Product::where('type', 1)->count();
             $customers = Customers::count();
             $staff = Staffs::count();
-            $sales = DB::table('sales')->where('user_id', $id)->sum('payment');
+            $sales = DB::table('sales')->where('user_id', $id)->sum('grand_total');
+            $latest = Sale::orderBy('id','desc')->take(7)->get();
+            // DB::table('sales')->sum('grand_total')
             // $incomeexpensechart = $this->incomeExpenseChart();
             return view("adminprofile.dashboard")
             ->with('items', $items)
             ->with('staff', $staff)
             ->with('customers', $customers)
-            ->with('sales', $sales);
+            ->with('sales', $sales)
+            ->with('latest', $latest);
             // ->with('incomeexpensechart', $incomeexpensechart);
 
         }
-                                    
+
     }
 
-    public function getMonthListFromDate(Carbon $start)
-    {
-        foreach (CarbonPeriod::create($start, '1 month', Carbon::today()) as $month){
-            $months[$months[$month->format('m-Y')]] = $month->format('F Y');
-        }
-            return $months;
-    }
+    // public function getMonthListFromDate(Carbon $start)
+    // {
+    //     foreach (CarbonPeriod::create($start, '1 month', Carbon::today()) as $month){
+    //         $months[$months[$month->format('m-Y')]] = $month->format('F Y');
+    //     }
+    //         return $months;
+    // }
 
-    public function incomeExpenseChart()
-    {
-        $monthsOfYear = $this->getMonthListFromDate();
-        $incomes = Sale::whereBetween('created_at', [ $monthsOfYear[0], $monthsOfYear[11]])->get();
-        $expenses = Receiving::whereBetween('created_at', [ $monthsOfYear[0], $monthsOfYear[11]])->get();
-        $chartArray = array();
-        foreach ($monthsOfYear as $month) {
-            $monthlyincome = "0";
-            $monthlyexpense = "0";
-            $monthlyincome = Sale::whereBetween('created_at', [ $month ])->count();
-            $monthlyexpense = Receiving::whereBetween('created_at', [ $month ])->count();
-            $chart = [
-                // 'y' => $month,
-                'a' => $monthlyexpense,
-                'b'=>$monthlyincome,
-            ];
-            $chartArray[] =  $chart;
-           
-        }
-        return $chartArray;
-    }
+    // public function incomeExpenseChart()
+    // {
+    //     $monthsOfYear = $this->getMonthListFromDate();
+    //     $incomes = Sale::whereBetween('created_at', [ $monthsOfYear[0], $monthsOfYear[11]])->get();
+    //     $expenses = Receiving::whereBetween('created_at', [ $monthsOfYear[0], $monthsOfYear[11]])->get();
+    //     $chartArray = array();
+    //     foreach ($monthsOfYear as $month) {
+    //         $monthlyincome = "0";
+    //         $monthlyexpense = "0";
+    //         $monthlyincome = Sale::whereBetween('created_at', [ $month ])->count();
+    //         $monthlyexpense = Receiving::whereBetween('created_at', [ $month ])->count();
+    //         $chart = [
+    //             // 'y' => $month,
+    //             'a' => $monthlyexpense,
+    //             'b'=>$monthlyincome,
+    //         ];
+    //         $chartArray[] =  $chart;
+
+    //     }
+    //     return $chartArray;
+    // }
 
     public function index()
     {
@@ -143,16 +147,16 @@ class AdminProfileController extends Controller
             $admin->admin_image = $fileNameToStore;
             $admin->objective = $request->objective;
             $admin->company_name = $request->company_name;
-            
+
            if($admin->save()){
-               
+
             notify()->success("Profile Created!","Success");
            }
            else{
             notify()->error("There was a problem creating your profile!","Error");
            }
-            
-            
+
+
 
             return redirect('/dashboard');
     }
@@ -212,7 +216,7 @@ class AdminProfileController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             //Upload image
             $path = $request->file('admin_image')->storeAs('public/admin_image',$fileNameToStore);
-            } 
+            }
 
             $admin = AdminProfile::find($id);
             $admin->address = $request->address;
@@ -220,7 +224,7 @@ class AdminProfileController extends Controller
             $admin->no_of_staff = $request->no_of_staff;
             $admin->objective = $request->objective;
             $admin->company_name = $request->company_name;
-            
+
             if($request->hasFile('admin_image')){
                 $admin->admin_image = $fileNameToStore;
             }

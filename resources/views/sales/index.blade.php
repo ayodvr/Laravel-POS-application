@@ -82,9 +82,9 @@
                           <tr ng-repeat="newsaletemp in saletemp">
                             {{-- <td ng-cloak>@{{newsaletemp.product_id}}</td> --}}
                             <td ng-cloak>@{{newsaletemp.product.name}}</td>
-                            <td ng-cloak>@{{newsaletemp.product.selling_price | currency}}</td>
+                            <td ng-cloak>@{{newsaletemp.product.selling_price | currency:'&#x20A6;'}}</td>
                             <td><input type="text" style="text-align:center;width:50px;" autocomplete="off" name="quantity" ng-change="updateSaleTemp(newsaletemp)" ng-cloak ng-model="newsaletemp.quantity" size="2"></td>
-                            <td ng-cloak>@{{newsaletemp.product.selling_price * newsaletemp.quantity | currency}}</td>
+                            <td ng-cloak>@{{newsaletemp.product.selling_price * newsaletemp.quantity | currency:'&#x20A6;'}}</td>
                             <td>
                                 <button class="btn btn-danger btn-xs" type="button" ng-cloak ng-click="removeSaleTemp(newsaletemp.id)">
                                     <span class="fas fa-trash" aria-hidden="true"></span>
@@ -112,7 +112,7 @@
                                 name="discount" id="add_discount" ng-model="add_discount" ng-init="add_discount =0" required/>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <p class="form-control-static"><b>@{{ (sum(saletemp)*add_discount_percent /100) + add_discount  | currency}}</b></p>
+                                <p class="form-control-static"><b>@{{ (sum(saletemp)*add_discount_percent /100) + add_discount  | currency:'&#x20A6;'}}</b></p>
                             </div> 
                          </div> --}}
                             {{-- <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
@@ -133,7 +133,7 @@
                                     name="payment" id="add_payment" ng-model="add_payment" ng-init="add_payment =0" required/>
                                 </div>
                                 <div class="col-sm-4 text-right" ng-cloak>
-                                    <p class="form-control-static"><b>@{{ add_payment | currency}}</b></p>    
+                                    <p class="form-control-static"><b>@{{ add_payment | currency:'&#x20A6;'}}</b></p>    
                                 </div>
                             </div>
                             {{-- <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
@@ -141,7 +141,7 @@
                                     <p>Tax</p>
                                 </div>
                                 <div class="col-sm-8 text-right">
-                                    <p class="form-control-static"><b>@{{ (0*(sum(saletemp))/100) | currency}}</b></p>
+                                    <p class="form-control-static"><b>@{{ (0*(sum(saletemp))/100) | currency:'&#x20A6;'}}</b></p>
                                     </div>
                                 </div>
                                 <div class="row mx-0 px-3 py-2 font-weight-bold border-top border-bottom" style="height:40px">
@@ -151,7 +151,7 @@
                                     
                                     <div class="col-sm-8 text-right">
                                          <p class="form-control-static">
-                                        <b>@{{ (sum(saletemp) - add_payment - add_discount - (sum(saletemp)*add_discount_percent /100))+ (0*(sum(saletemp))/100) | currency}}</b>
+                                        <b>@{{ (sum(saletemp) - add_payment - add_discount - (sum(saletemp)*add_discount_percent /100))+ (0*(sum(saletemp))/100) | currency:'&#x20A6;'}}</b>
                                     </p>
                                     </div>  
                                     
