@@ -63,7 +63,7 @@
   <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
   @include('sweetalert::alert')
   <script>
-          // Form method for delete/trash 
+          // Form method for delete/trash
             $('.delete-confirm').click(function(event) {
             var form =  $(this).closest("form");
             var name = $(this).data("name");
@@ -111,8 +111,8 @@
               url: "{{ url('/store')}}",
               method: "post",
               data:$('#regModal').serialize(),
-              beforeSend:function(){  
-                $('#insert').val("Registering");  
+              beforeSend:function(){
+                $('#insert').val("Registering");
             },
               success:function(data){
                 //console.log(result);
@@ -124,8 +124,8 @@
                 json = $.parseJSON(request.responseText);
                 $.each(json.errors, function(key, value){
                     $('.alert-danger').show();
-                    $('.alert-danger').append('<h6>'+value+'</h6>').delay(10000).fadeOut();           
-                });  
+                    $('.alert-danger').append('<h6>'+value+'</h6>').delay(10000).fadeOut();
+                });
              }
           });
       });
@@ -140,14 +140,14 @@
             </div>
           <div class="modal-body">
             <div class="text-center">
-              <div class="alert alert-success" style="display:none"></div>   
+              <div class="alert alert-success" style="display:none"></div>
               <div class="alert alert-danger" style="display:none">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            </div> 
+            </div>
             </div>
               <div class="card">
                 <div class="card-header card-header-auth">
@@ -181,7 +181,7 @@
                         <label for="email">{{ __('UserType') }}</label>
                       <select id="usertype" class="form-control @error('usertype') is-invalid @enderror" name="usertype">
                                       <option value="">Select User</option>
-                                      <option value="User">User</option>                 
+                                      <option value="User">User</option>
                       </select>
                       @error('usertype')
                           <span class="invalid-feedback" role="alert">
@@ -192,7 +192,7 @@
                       </div>
                       </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                       <div class="form-group col-6">
                         <label for="password" class="d-block">{{ __('Password') }}</label>
                         <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror" data-indicator="pwindicator"
@@ -206,10 +206,10 @@
                           <div class="bar"></div>
                           <div class="label"></div>
                         </div>
-                      </div>
-                      <div class="form-group col-6">
+                      </div> --}}
+                      {{-- <div class="form-group col-6">
                         <label for="password-confirm" class="d-block">{{ __('Confirm Password') }}</label>
-                        <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" data-indicator="pwindicator" 
+                        <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" data-indicator="pwindicator"
                         name="password_confirmation" autocomplete="new-password">
                         @error('password')
                               <span class="invalid-feedback" role="alert">
@@ -220,7 +220,7 @@
                             <div class="bar"></div>
                             <div class="label"></div>
                           </div>
-                      </div>
+                      </div> --}}
                     </div>
                     <div class="form-group">
                       <input type="submit" name="insert" id="insert" value="Register" class="btn btn-auth-color btn-lg btn-block">

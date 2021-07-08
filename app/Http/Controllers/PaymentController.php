@@ -32,7 +32,7 @@ class PaymentController extends Controller
     public function handleGatewayCallback()
     {
         $paymentDetails = Paystack::getPaymentData();
-        //dd($paymentDetails);
+        dd($paymentDetails);
         
 
     }   
