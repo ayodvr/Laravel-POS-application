@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,5 +88,8 @@ Route::get('reset-password/{token}', 'ForgotPasswordController@showResetPassword
 Route::post('reset-password', 'ForgotPasswordController@submitResetPasswordForm')->name('reset.password.post');
 
 Route::get('login-details','NewUserController@user_store');
+
+Route::post('project/importProject', 'ProjectController@importProject')->name('importProject');
+Route::resource('project', 'ProjectController');
 
 

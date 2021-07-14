@@ -177,6 +177,12 @@
                 <li><a class="nav-link" href="{{route('receiving.index')}}">Add Purchase</a></li>
               </ul>
             </li> --}}
+            {{-- <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-credit-card"></i><span>Uploads</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{url('/project')}}">Excel Upload</a></li>
+              </ul>
+            </li> --}}
           <li class="dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-cart-arrow-down"></i><span>Sales</span></a>
           <ul class="dropdown-menu">
