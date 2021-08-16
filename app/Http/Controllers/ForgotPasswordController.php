@@ -46,6 +46,7 @@ class ForgotPasswordController extends Controller
               $message->subject('Reset Password');
           });
 
+          return redirect()->back();
           notify()->success('We have e-mailed your password reset link!','Success');
       }
       /**
@@ -86,6 +87,6 @@ class ForgotPasswordController extends Controller
 
           DB::table('password_resets')->where(['email'=> $request->email])->delete();
           notify()->success('Your password has been changed!','Success');
-          return redirect('/login')
+          return redirect('/login');
       }
 }
