@@ -33,18 +33,18 @@ class StaffController extends Controller
         }else
         {
             notify()->warning("Access Denied!","Caution");
-                
+
             return redirect()->back();
         }
-        
-                                    
+
+
     }
 
     public function index()
     {
         // $staffs = Staffs::orderBy('id','asc')->get();
         // return view('staffs.index')->with('staffs',$staffs);
-        
+
         // $recs = array();
          //$users = DB::table("users")->select("id","name","email","usertype")->get();
         // array_push($recs,$users);
@@ -66,7 +66,7 @@ class StaffController extends Controller
         foreach ($users as $user){
             if($user->usertype == "Admin") continue;
             $staff_rec = Staffs::where("user_id","=",$user->id)->get();
-         
+
             if(!empty($staff_rec[0])){
                 $staff_rec_arr["user_id"]    =  $user->id;
                 $staff_rec_arr["id"]         =  $staff_rec[0]->id;
@@ -76,9 +76,9 @@ class StaffController extends Controller
                 $staff_rec_arr["email"]      =  $user->email;
                 $staff_rec_arr["status"]     =  $user->status;
                 $staff_rec_arr["usertype"]   =  $user->usertype;
-                $staff_rec_arr["department"] =  $staff_rec[0]->department; 
+                $staff_rec_arr["department"] =  $staff_rec[0]->department;
                 array_push($recs,$staff_rec_arr);
-           
+
             }else{
                 $staff_rec_arr["user_id"]    =  $user->id;
                 $staff_rec_arr["photo"]      =  "";
@@ -91,16 +91,16 @@ class StaffController extends Controller
                 $staff_rec_arr["department"] =  "";
                 array_push($recs,$staff_rec_arr);
             }
-            
-           
+
+
         }
                 //dd($recs);
             //  $data = $this->paginate($recs);
-       
+
             return view('staffs.index')->with('recs',$recs);
-        
-       
-                               
+
+
+
     }
 
     // public function paginate($items, $perPage = 3, $page = null, $options = [])
@@ -120,7 +120,7 @@ class StaffController extends Controller
     //             'pageName' => $pageName,
     //         ]
     //     );
-        
+
     // }
 
     public function changeStatus(Request $request, $id)
@@ -226,11 +226,11 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        $staff = Staffs::find($id);    
-       //dd($staff);  
+        $staff = Staffs::find($id);
+       //dd($staff);
 
-         return view('staffs.show')->with('staff',$staff);              
-                                 
+         return view('staffs.show')->with('staff',$staff);
+
     }
 
     /**
@@ -279,7 +279,7 @@ class StaffController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             //Upload image
             $path = $request->file('photo')->storeAs('public/photo',$fileNameToStore);
-            } 
+            }
             //dd($request->all());
             $staff = Staffs::find($id);
             $staff->address = $request->address;
@@ -290,13 +290,13 @@ class StaffController extends Controller
             $staff ->department = $request->department;
             $staff->experience = $request->experience;
             $staff->status = $request->status;
-            
+
             if($request->hasFile('photo')){
                 $staff->photo = $fileNameToStore;
             }
 
             if($staff->save()){
-                
+
                 notify()->success("Profile Updated!","Success");
 
             }else{
@@ -317,7 +317,7 @@ class StaffController extends Controller
         $user = User::findorfail($id);
 
         $user->delete();
-       
+
         notify()->success("User Deleted!","Success");
 
         return redirect()->back();
@@ -361,11 +361,11 @@ class StaffController extends Controller
         //     $del =  DB::select("delete from users where id = '$staff->user_id'");
         // }
 
-        
+
         $user = User::findorfail($id);
 
         $delete_act = $user->delete();
-        
+
         if($delete_act)
         {
             $del =  DB::select("delete from staffs where user_id = '$user->id'");
